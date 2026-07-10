@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emoción Libre - Rompe el Ciclo, Salva tu Vida</title>
+<style>
+:root {
+    --bg-dark: #0b0f19;
+    --card-bg: #131c2e;
+    --card-hover: #1b2742;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-blue: #38bdf8;
+    --accent-purple: #c084fc;
+    --accent-green: #22c55e;
+    --accent-rose: #f43f5e;
+    --accent-amber: #fbbf24;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* ENCABEZADO CON IMAGEN DE APOYO PROFESIONAL Y EMPATÍA */
+header {
+    background: linear-gradient(135deg, rgba(11, 15, 25, 0.88), rgba(19, 28, 46, 0.75)), 
+                url('https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    text-align: center;
+    padding: 140px 20px;
+    position: relative;
+    border-bottom: 2px solid rgba(192, 132, 252, 0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 4.2rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 30px rgba(192, 132, 252, 0.4);
+}
+
+header p {
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin: 25px auto 0;
+    color: #e2e8f0;
+    font-weight: 400;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.7);
+}
+
+.sos-alert-bar {
+    background: linear-gradient(90deg, #991b1b, #7f1d1d);
+    color: #fff;
+    text-align: center;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--accent-rose);
+}
+
+nav {
+    background: rgba(11, 15, 25, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 18px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--accent-blue);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+/* INTERACTIVE EMERGENCY COMPASS */
+.emotion-router {
+    background: linear-gradient(145deg, #131c2e, #0b0f19);
+    border: 1px solid rgba(192, 132, 252, 0.2);
+    border-radius: 28px;
+    padding: 45px;
+    text-align: center;
+    margin-bottom: 60px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.emotion-router h2 {
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.emotion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 35px;
+}
+
+.emotion-btn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 30px 22px;
+    color: var(--text-main);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.emotion-btn .emoji {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.emotion-btn h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.emotion-btn p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.emotion-btn.triste:hover { border-color: var(--accent-blue); box-shadow: 0 0 25px rgba(56, 189, 248, 0.25); background: rgba(56, 189, 248, 0.04); }
+.emotion-btn.ansioso:hover { border-color: var(--accent-amber); box-shadow: 0 0 25px rgba(251, 191, 36, 0.25); background: rgba(251, 191, 36, 0.04); }
+.emotion-btn.impulso:hover { border-color: var(--accent-rose); box-shadow: 0 0 30px rgba(244, 63, 94, 0.35); background: rgba(244, 63, 94, 0.06); }
+.emotion-btn.solo:hover { border-color: var(--accent-purple); box-shadow: 0 0 25px rgba(192, 132, 252, 0.25); background: rgba(192, 132, 252, 0.04); }
+
+.emotion-btn:hover .emoji {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* CARDS AND GRIDS */
+.card {
+    background-color: var(--card-bg);
+    padding: 45px;
+    margin-bottom: 45px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.card h2 {
+    color: #fff;
+    font-size: 2.2rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+    background: linear-gradient(to right, #fff, var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 40px;
+}
+
+.rescue-box {
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 18px;
+    padding: 25px;
+    border-left: 4px solid var(--accent-amber);
+    margin-top: 20px;
+}
+
+.rescue-box h4 {
+    margin: 0 0 10px 0;
+    color: var(--accent-amber);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* BUTTONS */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 35px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(192, 132, 252, 0.3);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 15px 30px rgba(192, 132, 252, 0.5);
+    transform: translateY(-3px);
+}
+
+.btn-whatsapp {
+    background: #22c55e;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+}
+
+.btn-whatsapp:hover {
+    background: #16a34a;
+    box-shadow: 0 15px 30px rgba(34, 197, 94, 0.5);
+    transform: translateY(-3px);
+}
+
+.timeline {
+    margin: 30px 0;
+    padding-left: 20px;
+    border-left: 2px solid rgba(255,255,255,0.1);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 25px;
+    padding-left: 20px;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -27px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    box-shadow: 0 0 10px var(--accent-blue);
+}
+
+.timeline-item h4 {
+    margin: 0 0 5px 0;
+    color: #fff;
+    font-size: 1.15rem;
+}
+
+ul.checked-list {
+    list-style: none;
+    padding: 0;
+}
+
+ul.checked-list li {
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+}
+
+ul.checked-list li strong {
+    color: #fff;
+}
+
+ul.checked-list li::before {
+    content: "✦";
+    position: absolute;
+    left: 5px;
+    color: var(--accent-purple);
+    font-weight: bold;
+}
+
+/* PLANES BENEFICIOS */
+.planes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+
+.pack {
+    background: rgba(11, 15, 25, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    padding: 40px 30px;
+    border-radius: 24px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.pack.featured {
+    border-color: var(--accent-purple);
+    background: linear-gradient(180deg, rgba(192, 132, 252, 0.06), rgba(11, 15, 25, 0.6));
+    transform: scale(1.03);
+}
+
+.pack.featured .badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-purple);
+    color: #fff;
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.price {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 20px 0;
+}
+
+.price span {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.pack ul {
+    list-style: none;
+    padding: 0;
+    margin: 25px 0;
+    text-align: left;
+}
+
+.pack ul li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 12px;
+    color: #cbd5e1;
+}
+
+.pack ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-weight: bold;
+}
+
+.hero-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(11,15,25,0.5), rgba(11,15,25,0.95)), 
+                url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80') center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.play-icon {
+    font-size: 4rem;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    width: 95px;
+    height: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.video-placeholder:hover .play-icon {
+    transform: scale(1.1);
+    background: var(--accent-blue);
+    color: #fff;
+    box-shadow: 0 0 35px rgba(56, 189, 248, 0.6);
+}
+
+.caso-item {
+    background: rgba(11, 15, 25, 0.5);
+    border: 1px solid rgba(255,255,255,0.02);
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.caso-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    header h1 { font-size: 2.8rem; }
+    header p { font-size: 1.2rem; }
+    .card { padding: 25px; }
+}
+</style>
+</head>
+<body>
+
+<div class="sos-alert-bar">
+    🚨 ¿CRISIS AHORA MISMO? No cierres esta pestaña. Desliza hacia abajo o presiona el botón de WhatsApp. Hay salida.
+</div>
+
+<header>
+    <h1>EMOCIÓN LIBRE</h1>
+    <p>Sanar tus emociones es el primer paso para desactivar la adicción. Un espacio diseñado por expertos para proteger tu mente, sin juzgar tu pasado.</p>
+</header>
+
+<nav>
+    <a href="#emociones">Auxilio Emocional</a>
+    <a href="#noticias">Casos de Éxito</a>
+    <a href="#info">¿Qué le pasa a mi mente?</a>
+    <a href="#blog">Guías Clínicas</a>
+    <a href="#beneficios">Soporte</a>
+    <a href="#talleres">Talleres Escolares</a>
+</nav>
+
+<div class="container">
+
+    <div class="emotion-router" id="emociones">
+        <h2>¿Qué tormenta hay en tu mente hoy?</h2>
+        <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Selecciona el estado emocional que estás experimentando. Desplegaremos un plan de acción psicológico inmediato para protegerte.</p>
+        
+        <div class="emotion-grid">
+            <div class="emotion-btn triste">
+                <span class="emoji">😔</span>
+                <h3>Vacío Extremo o Tristeza</h3>
+                <p>El dolor que no se habla se convierte en adicción. Aprende a darle salida a tu tristeza de forma segura.</p>
+            </div>
+            <div class="emotion-btn ansioso">
+                <span class="emoji">⚡</span>
+                <h3>Ansiedad y Mente Acelerada</h3>
+                <p>¿Sientes que el pecho te explota? Te enseñamos la técnica 5-4-3-2-1 para frenar el pánico en segundos.</p>
+            </div>
+            <div class="emotion-btn impulso">
+                <span class="emoji">🔥</span>
+                <h3>Deseo Incontrolable de Consumir</h3>
+                <p><strong>¡ALERTA DE ANTOJO!</strong> El pico de ansiedad dura solo de 15 a 20 minutos. Entra aquí para resistir el conteo.</p>
+            </div>
+            <div class="emotion-btn solo">
+                <span class="emoji">👥</span>
+                <h3>Soledad o Presión Social</h3>
+                <p>¿Sientes que para encajar debes consumir? Descubre cómo poner límites sin perder tu identidad.</p>
+            </div>
+            <div class="emotion-btn triste">
+                <span class="emoji">🎒</span>
+                <h3>Frustración o Estrés Escolar</h3>
+                <p>¿Sientes que no puedes con las notas o las expectativas? El rendimiento académico no define tu valor real.</p>
+            </div>
+            <div class="emotion-btn impulso">
+                <span class="emoji">💔</span>
+                <h3>Culpa Crítica o Vergüenza</h3>
+                <p>¿Tuviste un error o una recaída? Castigarte solo alimenta el ciclo. Aprende a perdonarte y empezar de cero.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="background: linear-gradient(135deg, #131c2e, #1e1b4b); border: 2px solid rgba(56, 189, 248, 0.3);">
+        <div class="grid-2" style="align-items: center;">
+            <div>
+                <span style="color: var(--accent-blue); font-weight: 800; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1.5px; display:block; margin-bottom:10px;">Línea Directa de Rescate Anónimo</span>
+                <h2>No estás solo en la oscuridad. Háblanos.</h2>
+                <p style="font-size: 1.2rem; color: #f1f5f9; margin-bottom:15px;">Da el paso más valiente: pedir ayuda. Es completamente confidencial, gratuito y sin represalias.</p>
+                
+                <div class="rescue-box">
+                    <h4>💡 SOS Técnica del Minuto Cero</h4>
+                    <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">Si tienes la sustancia en la mano, <strong>espera 5 minutos antes de tomar una decisión</strong>. En esos 5 minutos, presiona el botón verde de abajo y escribe una sola palabra: <em>"Ayuda"</em>.</p>
+                </div>
+
+                <div style="margin-top: 35px; display: flex; flex-wrap: wrap; gap: 15px;">
+                    <a class="btn btn-whatsapp" href="https://wa.me/593999999999" target="_blank">💬 Auxilio por WhatsApp las 24 Horas</a>
+                    <a class="btn btn-primary" href="#app">📱 Descargar App Ecosistema de Apoyo</a>
+                </div>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80" alt="Psicoterapeuta juvenil empático" style="width:100%; border-radius:24px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);">
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="noticias">
+        <h2>Evidencia Viva: Historias de Victoria Absoluta</h2>
+        <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Ellos estuvieron exactamente donde tú estás parado hoy. Mira cómo reconstruyeron sus vidas desde las cenizas.</p>
+        
+        <div class="emotion-grid">
+            <div class="caso-item">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="Juan en recuperación exitosa">
+                <h4 style="margin: 10px 0 5px 0; font-size: 1.3rem;">Juan, 17 años</h4>
+                <p style="color: var(--accent-blue); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; margin: 0 0 12px 0;">Libre de Sustancias desde hace 14 meses</p>
+                <p style="font-style: italic; color: #cbd5e1; font-size: 0.95rem;">"Consumía para apagar la ansiedad de ver a mis padres pelear. Cuando aprendí en Emoción Libre a canalizar mis crisis mediante el deporte de contacto, la necesidad de drogarme desapareció."</p>
+            </div>
+            
+            <div class="caso-item">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80" alt="María en superación personal">
+                <h4 style="margin: 10px 0 5px 0; font-size: 1.3rem;">María, 19 años</h4>
+                <p style="color: var(--accent-purple); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; margin: 0 0 12px 0;">Líder de la red de apoyo estudiantil</p>
+                <p style="font-style: italic; color: #cbd5e1; font-size: 0.95rem;">"Empezó como un juego en fiestas y terminó controlando mis días. La aplicación me dio un botón de pánico que usé tres veces en mis peores momentos. Hoy guío a otras chicas."</p>
+            </div>
+
+            <div class="caso-item">
+                <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=400&q=80" alt="Comunidad escolar unida">
+                <h4 style="margin: 10px 0 5px 0; font-size: 1.3rem;">Colegio Técnico Central</h4>
+                <p style="color: var(--accent-green); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; margin: 0 0 12px 0;">Zona Libre de Consumo Declarada</p>
+                <p style="font-style: italic; color: #cbd5e1; font-size: 0.95rem;">Implementaron los talleres and los buzones de ayuda interactiva. Redujeron en un 40% los índices de riesgo y crearon un entorno donde pedir terapia psicológica es motivo de orgullo.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="info">
+        <div class="grid-2" style="align-items: center;">
+            <div>
+                <img class="hero-image" src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1200&q=80" alt="Explicación científica y empática sobre el cerebro">
+            </div>
+            <div>
+                <h2>La Neurociencia de la Adicción (Sin rodeos)</h2>
+                <p style="font-size: 1.15rem; color: #cbd5e1;">Tú no eres una mala persona; eres una mente atrapada en un secuestro de dopamina.</p>
+                <p style="color: var(--text-muted);">
+                    Cuando experimentas traumas, abandono, estrés escolar o bullying, el dolor activa tus centros de alarma. Al consumir una sustancia, el cerebro recibe una descarga masiva de dopamina (placer artificial).
+                </p>
+                <p style="color: var(--text-muted);">
+                    El peligro es que tu cerebro apaga sus filtros naturales y empieza a creer que necesita la sustancia para sobrevivir. Por eso el síndrome de abstinencia duele tanto. Nuestra meta es enseñarte a producir químicos de felicidad reales (oxitocina y endorfinas) mediante actividades de alto impacto.
+                </p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Fase 1: El Detonante Emocional</h4>
+                        <p style="margin:0; font-size:0.9rem; color: var(--text-muted);">Tristeza o frustración bloqueada que nubla el juicio.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Fase 2: El Impulso Crítico</h4>
+                        <p style="margin:0; font-size:0.9rem; color: var(--text-muted);">Tu mente busca un alivio rápido y te tienta a consumir.</p>
+                    </div>
+                    <div class="timeline-item" style="padding-bottom:0;">
+                        <h4>Fase 3: El Hackeo Emocional (Nuestra Meta)</h4>
+                        <p style="margin:0; font-size:0.9rem; color: var(--text-muted);">Aplicas la técnica de contención, rompes el ciclo y recuperas tu libertad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="blog">
+        <h2>Manuales Prácticos de Supervivencia Emocional</h2>
+        <div class="grid-2">
+            <div>
+                <p style="font-size: 1.15rem; color:#f1f5f9;">Herramientas descargables y lecturas diseñadas para salvar momentos de crisis:</p>
+                <ul class="checked-list">
+                    <li><strong>Guía Psicológica de Urgencia (PDF):</strong> Acciones paso a paso para padres cuando descubren un caso de consumo. Cómo actuar con amor y firmeza en lugar de violencia.</li>
+                    <li><strong>El Escudo de la Autoestima:</strong> Ejercicios prácticos de autovaloración para resistir la presión de amigos que te incitan a consumir.</li>
+                    <li><strong>Protocolo de Manejo de la Recaída:</strong> Si caíste de nuevo, no has perdido todo. Una guía para levantarte sin culpa y reiniciar el contador con fuerza.</li>
+                    <li><strong>Podcast "Voz Libre":</strong> Conversaciones sin censura con terapeutas expertos en adicciones juveniles.</li>
+                </ul>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=500&q=80" alt="Bitácora de estudio y crecimiento emocional" style="width:100%; border-radius:20px; box-shadow: 0 15px 30px rgba(0,0,0,0.3);">
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="beneficios">
+        <h2 style="display:block; text-align:center; margin-bottom: 10px;">Herramientas Especializadas de Recuperación</h2>
+        <p style="text-align:center; max-width:700px; margin:0 auto 40px; color: var(--text-muted); font-size: 1.1rem;">Todo lo recaudado financia el tratamiento gratuito de jóvenes de bajos recursos económicos en adicciones.</p>
+        
+        <div class="planes-container">
+            <div class="pack">
+                <h3>Plan Auto-Ayuda</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Para iniciar de manera independiente</p>
+                <div class="price">$10 <span>/ pago único</span></div>
+                <ul>
+                    <li>Cuaderno interactivo de control de impulsos.</li>
+                    <li>Acceso al test clínico de rastreo de ansiedad.</li>
+                    <li>E-books de rescate emocional preventivo.</li>
+                </ul>
+                <a href="#" class="btn btn-primary" style="width:100%; margin-top:20px; background: transparent; border: 2px solid rgba(255,255,255,0.2);">Adquirir Kit</a>
+            </div>
+
+            <div class="pack featured">
+                <div class="badge">SOPORTE TERAPÉUTICO</div>
+                <h3>Plan Comunidad Activa</h3>
+                <p style="color: var(--accent-purple); font-size: 0.85rem; font-weight:700;">Acompañamiento Grupal Continuo</p>
+                <div class="price">$20 <span>/ mes</span></div>
+                <ul>
+                    <li>Todo el material del Plan Auto-Ayuda.</li>
+                    <li>Acceso a salas de terapia grupal anónimas guiadas por psicólogos.</li>
+                    <li>Alertas diarias de prevención de recaídas vía SMS.</li>
+                    <li>Rastreador interactivo de días limpios en la App.</li>
+                </ul>
+                <a href="#" class="btn btn-primary" style="width:100%; margin-top:20px;">Unirme al Ecosistema</a>
+            </div>
+
+            <div class="pack">
+                <h3>Plan Escolar Premium</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Protección institucional para Colegios</p>
+                <div class="price">$35 <span>/ mes</span></div>
+                <ul>
+                    <li>Licencia para 200 estudiantes en la App.</li>
+                    <li>1 Taller interactivo de prevención al mes.</li>
+                    <li>Capacitación especializada para el departamento de consejería (DECE).</li>
+                    <li>Canal de denuncias confidencial de expendio.</li>
+                </ul>
+                <a href="#" class="btn btn-primary" style="width:100%; margin-top:20px; background: transparent; border: 2px solid rgba(255,255,255,0.2);">Equipar mi Colegio</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="app" style="background: linear-gradient(rgba(11, 15, 25, 0.8), rgba(139, 92, 246, 0.45)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80') center/cover; color: white; text-align: center;">
+        <h2 style="color: white; justify-content: center; font-size: 2.5rem;">Una Red de Salvamento en tu Teléfono</h2>
+        <p style="max-width:700px; margin: 20px auto 35px auto; font-size: 1.15rem; color: #f1f5f9;">
+            Convierte tu recuperación en un juego de rol. Gana medallas virtuales por cumplir metas diarias de meditación, recibe frases de aliento de jóvenes de todo el mundo y desbloquea el chat directo con profesionales cuando tu medidor de antojo esté al máximo.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+            <a class="btn" href="#" style="background:#05070c; color: white; border: 1px solid rgba(255,255,255,0.15);">🤖 Descargar APK (Android / Play Store)</a>
+            <a class="btn" href="#" style="background:#05070c; color: white; border: 1px solid rgba(255,255,255,0.15);">🍏 Descargar para iOS (App Store)</a>
+        </div>
+    </div>
+
+    <div class="card" id="videos">
+        <h2>Aprende a Desarmar el Antojo en Minutos</h2>
+        <p style="margin-bottom:30px; color: var(--text-muted); font-size: 1.05rem;">Mira este micro-documental animado sobre cómo entrenar a tus neuronas para resistir la tentación en los entornos más difíciles.</p>
+        <div class="video-container">
+            <div class="video-placeholder">
+                <div class="play-icon">▶</div>
+                <h3 style="margin-top:0; font-size:1.6rem;">¿Qué hacer en los 15 minutos más críticos del antojo?</h3>
+                <p style="max-width: 550px; color: #cbd5e1; font-size: 1rem;">[Inserta aquí tu video institucional o de YouTube enfocado en control de adicciones juveniles]</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="talleres" style="margin-bottom: 0;">
+        <div class="grid-2" style="align-items: center;">
+            <div>
+                <h2>Talleres Vivenciales de Alto Impacto</h2>
+                <p style="font-size: 1.15rem;">Basta de charlas aburridas que los jóvenes ignoran. Nosotros cambiamos mentalidades mediante dinámicas de shock empático:</p>
+                <ul class="checked-list">
+                    <li><strong>Simulación de Presión Social (Teatro de Roles):</strong> Ponemos a los alumnos en situaciones reales donde se les ofrece drogas y les enseñamos respuestas ingeniosas, asertivas y firmes para decir "No" sin perder el estilo.</li>
+                    <li><strong>Mapeo del Vacío Emocional:</strong> Actividades artísticas (música urbana, grafiti legal, programación) orientadas a llenar las necesidades afectivas que las sustancias suelen suplantar.</li>
+                    <li><strong>Escuela para Padres Inquebrantables:</strong> Herramientas para erradicar el castigo violento y sustituirlo por el monitoreo afectivo y la detección temprana de sustancias en el hogar.</li>
+                </ul>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" alt="Adolescentes interactuando sanamente en un aula de clase" style="width:100%; border-radius:24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05);">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer style="background:#05070c; color: var(--text-muted); text-align:center; padding:40px 20px; font-size:0.95rem; margin-top: 60px; border-top: 1px solid rgba(192, 132, 252, 0.1);">
+    <p style="margin: 0 0 10px 0; color: #fff; font-weight: bold;">EMOCIÓN LIBRE &reg; 2026</p>
+    <p style="margin: 0; max-width: 600px; margin: 0 auto; font-size: 0.85rem;">Este sitio es un prototipo interactivo de intervención social enfocado en la salud pública y el control preventivo de adicciones en adolescentes. Si estás en una emergencia real, busca ayuda profesional médica inmediata.</p>
+</footer>
+
+</body>
+</html>
