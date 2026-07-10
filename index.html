@@ -520,7 +520,7 @@ ul.checked-list li::before {
                 </div>
 
                 <div style="margin-top: 35px; display: flex; flex-wrap: wrap; gap: 15px;">
-                    <a class="btn btn-whatsapp" href="https://wa.me/593999999999" target="_blank">💬 Auxilio por WhatsApp las 24 Horas</a>
+                    <a class="btn btn-whatsapp" href="https://wa.me/593987654321" target="_blank">💬 Auxilio por WhatsApp las 24 Horas</a>
                     <a class="btn btn-primary" href="#app">📱 Descargar App Ecosistema de Apoyo</a>
                 </div>
             </div>
@@ -701,6 +701,57 @@ ul.checked-list li::before {
     <p style="margin: 0 0 10px 0; color: #fff; font-weight: bold;">EMOCIÓN LIBRE &reg; 2026</p>
     <p style="margin: 0; max-width: 600px; margin: 0 auto; font-size: 0.85rem;">Este sitio es un prototipo interactivo de intervención social enfocado en la salud pública y el control preventivo de adicciones en adolescentes. Si estás en una emergencia real, busca ayuda profesional médica inmediata.</p>
 </footer>
+<script>
 
+const mensajes = {
+triste:"😔 La tristeza es temporal.\n\n✔ Respira profundamente 5 veces.\n✔ Habla con alguien de confianza.\n✔ Recuerda que pedir ayuda es una fortaleza.",
+
+ansioso:"⚡ Ansiedad\n\nPrueba la técnica 5-4-3-2-1:\n\n5 cosas que ves\n4 que tocas\n3 que escuchas\n2 que hueles\n1 que saboreas.",
+
+impulso:"🔥 El impulso suele durar entre 15 y 20 minutos.\n\nEspera unos minutos.\nToma agua.\nSal a caminar.\nLlama a alguien.",
+
+solo:"👥 No estás solo.\n\nBusca un amigo, un familiar o un profesor.\nHablar ayuda mucho.",
+
+ayuda:"📞 Si necesitas ayuda inmediata comunícate con un familiar, psicólogo o llama a los servicios de emergencia de tu localidad."
+
+};
+
+document.querySelectorAll(".emotion-btn").forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+if(btn.classList.contains("triste"))
+alert(mensajes.triste);
+
+else if(btn.classList.contains("ansioso"))
+alert(mensajes.ansioso);
+
+else if(btn.classList.contains("impulso"))
+alert(mensajes.impulso);
+
+else if(btn.classList.contains("solo"))
+alert(mensajes.solo);
+
+});
+
+});
+
+document.querySelectorAll(".btn").forEach(btn=>{
+
+btn.addEventListener("click",function(e){
+
+if(this.getAttribute("href")=="#"){
+
+e.preventDefault();
+
+alert("🚀 Esta función será implementada en una futura versión del proyecto.");
+
+}
+
+});
+
+});
+
+</script>
 </body>
 </html>
