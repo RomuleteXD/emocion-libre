@@ -911,25 +911,21 @@ function crearToast(mensaje) {
     }, 5000);
 }
 
-// 3. Inyección dinámica del reproductor de video (Lazy Loading de Iframe)
-const videoTrigger = document.getElementById('play-video-trigger');
-if (videoTrigger) {
-    videoTrigger.addEventListener('click', () => {
+const videoBtn = document.getElementById('video-clinical-trigger');
+if (videoBtn) {
+    videoBtn.addEventListener('click', () => {
         const container = document.querySelector('.video-container');
-        // ID de video de YouTube enfocado en control de impulsos / adicciones
-        const videoId = 'Fv0Kms4P4n0'; 
-        
         container.innerHTML = `
             <iframe 
-                src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
-                title="Técnicas de control de impulsos" 
+                src="https://www.youtube-nocookie.com/embed/xuU_cCFOFA0?autoplay=1&start=36" 
+                title="Cómo REGULAR tus EMOCIONES" 
                 frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
             </iframe>
         `;
-        crearToast("🎥 Cargando microdocumental terapéutico animado...");
+        pushNotification("🎥 Inicializando reproducción del microdocumental académico...");
     });
 }
 
