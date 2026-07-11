@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Emoción Libre - Plataforma Universitaria de Intervención Psoeducativa</title>
+<title>Emoción Libre - Plataforma Universitaria de Intervención Psicoeducativa</title>
 <style>
 :root {
     --bg-dark: #0f172a;
@@ -49,7 +49,7 @@ body {
 
 header {
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85)), 
-                url('https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+                url('https://picsum.photos/id/180/1600/900') center/cover no-repeat;
     text-align: center;
     padding: 100px 20px;
     border-bottom: 1px solid var(--border-color);
@@ -160,7 +160,7 @@ nav a:hover {
     color: var(--text-muted);
 }
 
-/* CONSOLA DE INTERVENCIÓN ASISTIDA */
+/* PANEL DINÁMICO */
 .intervention-panel {
     display: none;
     background: #0b0f19;
@@ -240,7 +240,7 @@ nav a:hover {
     letter-spacing: 0.5px;
 }
 
-/* BOTONES INTEGRADOS */
+/* BOTONES */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -251,7 +251,7 @@ nav a:hover {
     font-weight: 600;
     font-size: 0.95rem;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, transform 0.1s ease;
     border: none;
 }
 
@@ -271,16 +271,6 @@ nav a:hover {
 
 .btn-whatsapp:hover {
     background-color: #059669;
-}
-
-.btn-outline {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-}
-
-.btn-outline:hover {
-    background: rgba(255,255,255,0.05);
 }
 
 .timeline {
@@ -318,12 +308,83 @@ ul.clean-list li::before {
     color: var(--accent-emerald);
 }
 
+/* VENTANA MODAL (PASARELA SIMULADA) */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(2, 6, 23, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 520px;
+    border-radius: 16px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-close:hover { color: #fff; }
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    background: #0f172a;
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
 /* SISTEMA TOAST */
 .toast-area {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 10000;
+    z-index: 10001;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -341,6 +402,7 @@ ul.clean-list li::before {
     animation: slideIn 0.2s ease forwards;
 }
 
+/* CONTENEDOR DEL VIDEO */
 .video-container {
     position: relative;
     padding-bottom: 56.25%;
@@ -348,18 +410,25 @@ ul.clean-list li::before {
     overflow: hidden;
     border-radius: 12px;
     background: #0f172a;
+    border: 1px solid var(--border-color);
 }
 
 .video-cover {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.9)), 
-                url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80') center/cover;
+    background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.95)), 
+                url('https://picsum.photos/id/60/1000/600') center/cover;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.video-cover:hover {
+    background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.85)), 
+                url('https://picsum.photos/id/60/1000/600') center/cover;
 }
 
 @keyframes slideIn {
@@ -382,7 +451,7 @@ ul.clean-list li::before {
 
 <div class="institutional-bar">
     <div>Proyecto de Investigación Universitaria — <span>Protocolo Abierto Preventivo</span></div>
-    <div>Estatus: 100% Anónimo e Inofensivo</div>
+    <div>Estatus de Prueba: Módulos Interactivos Habilitados</div>
 </div>
 
 <header>
@@ -394,7 +463,7 @@ ul.clean-list li::before {
     <a href="#emociones">Módulos de Soporte</a>
     <a href="#casos">Estudios de Caso</a>
     <a href="#evidencia">Fundamentación Científica</a>
-    <a href="#recursos">Guías de Descarga</a>
+    <a href="#recursos">Adquisición de Kits</a>
 </nav>
 
 <div class="container">
@@ -423,7 +492,6 @@ ul.clean-list li::before {
             </div>
         </div>
 
-        <!-- PANEL DINÁMICO DONDE EMPIEZA LA EVALUACIÓN DEL USUARIO -->
         <div class="intervention-panel" id="clinical-panel">
             <h4 id="panel-title">Título del Módulo Psicológico</h4>
             <p id="panel-text">Cuerpo metodológico de la guía.</p>
@@ -438,7 +506,7 @@ ul.clean-list li::before {
         </div>
     </div>
 
-    <!-- LINEA DE ASISTENCIA DIRECTA (SIN SIMULACROS DE PAGO) -->
+    <!-- LINEA DE ASISTENCIA DIRECTA -->
     <div class="card" style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid var(--accent-blue);">
         <div class="grid-2" style="align-items: center;">
             <div>
@@ -457,13 +525,13 @@ ul.clean-list li::before {
             <div>
                 <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding:30px; border-radius:12px;">
                     <h4 style="color:#fff; margin-top:0;">Compromiso de Privacidad</h4>
-                    <p style="color: var(--text-muted); font-size:0.9rem; margin-bottom:0;">Esta plataforma web de soporte no almacena cookies, direcciones IP, ni registros de las opciones seleccionadas. El entorno es 100% seguro para pruebas de usabilidad con pacientes.</p>
+                    <p style="color: var(--text-muted); font-size:0.9rem; margin-bottom:0;">Esta plataforma web de soporte no almacena cookies de rastreo corporativo. El entorno es seguro y controlado para simulaciones de usabilidad con pacientes en fase de evaluación.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- SECCIÓN DE CASOS CON FORMATO ACADÉMICO -->
+    <!-- SECCIÓN DE CASOS -->
     <div class="card" id="casos">
         <h2>Evidencia de Recuperación y Seguimiento Clínico</h2>
         <p style="color: var(--text-muted); margin-bottom: 30px;">Modelos analíticos de evolución terapéutica real documentados de forma anónima:</p>
@@ -506,39 +574,84 @@ ul.clean-list li::before {
         </div>
     </div>
 
-    <!-- RECURSOS INTERACTIVOS (DESCARGAS SOBERANAS) -->
+    <!-- RECURSOS INTERACTIVOS -->
     <div class="card" id="recursos">
-        <h2>Manuales de Intervención y Recursos Psicoeducativos</h2>
-        <p style="color: var(--text-muted); margin-bottom: 25px;">Documentación técnica de acceso abierto para la gestión de crisis y soporte académico:</p>
+        <h2>Módulo de Pruebas: Adquisición de Kit Integral de Apoyo</h2>
+        <p style="color: var(--text-muted); margin-bottom: 25px;">Para la validación del flujo de usuario del trabajo académico, puede simular el proceso completo de registro y facturación del material psicoeducativo institucional.</p>
         
         <div class="grid-2">
             <div>
                 <ul class="clean-list">
-                    <li><strong>Guía de Urgencia Psico-Familiar (PDF):</strong> Protocolos de comunicación asertiva para familiares ante la detección de consumos activos.</li>
-                    <li><strong>Manual de Autovaloración y Resiliencia Social:</strong> Matrices conductuales para mitigar la presión en entornos colectivos de riesgo.</li>
-                    <li><strong>Bitácora de Control de Recaídas:</strong> Herramienta metodológica para el análisis de contingencias y reinicio seguro de metas.</li>
+                    <li><strong>Bitácora Física Completa:</strong> Planificador de contingencias y mapas cognitivos de control de impulsos semanales.</li>
+                    <li><strong>Guía Clínica de Urgencia:</strong> Documentación impresa de desescalamiento familiar.</li>
+                    <li><strong>Acceso Completo:</strong> Código único institucional para desbloquear la plataforma de rastreo PWA.</li>
                 </ul>
             </div>
             <div style="display:flex; flex-direction:column; justify-content:center; gap:12px;">
-                <button class="btn btn-outline dl-trigger">📥 Descargar Paquete Completo de Guías Clínicas (PDF)</button>
-                <button class="btn btn-outline dl-trigger">📱 Solicitar Acceso a la Versión Beta PWA</button>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #fff; text-align: center; margin-bottom: 5px;">Costo de Recuperación: $15.00</div>
+                <button class="btn btn-primary" id="open-gateway-btn">🛒 Solicitar Kit y Simular Pago</button>
             </div>
         </div>
     </div>
 
-    <!-- REPRODUCTOR MULTIMEDIA PROFESIONAL -->
+    <!-- REPRODUCTOR MULTIMEDIA -->
     <div class="card">
-        <h2>Material Audiovisual Psicoeducativo</h2>
-        <p style="margin-bottom:25px; color: var(--text-muted);">Cápsula explicativa sobre la administración cognitiva del tiempo frente a respuestas impulsivas.</p>
+        <h2>Material Audiovisual Psicoeducativo Integrado</h2>
+        <p style="margin-bottom:25px; color: var(--text-muted);">Visualización del microdocumental clínico para el análisis de la regulación emocional.</p>
         <div class="video-container">
             <div class="video-cover" id="video-clinical-trigger">
-                <div class="play-icon" style="font-size: 3rem; background: rgba(255,255,255,0.1); width: 80px; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:50%; margin-bottom:15px;">▶</div>
-                <h3 style="margin:0; font-size:1.3rem; color:#fff;">Manejo Clínico del Craving en Pacientes Jóvenes</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem; margin-top:5px;">Haga clic para inicializar la reproducción científica.</p>
+                <div style="font-size: 3rem; background: rgba(56, 189, 248, 0.2); border: 2px solid var(--accent-blue); width: 80px; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:50%; margin-bottom:15px; color: var(--accent-blue);">▶</div>
+                <h3 style="margin:0; font-size:1.3rem; color:#fff;">Cómo REGULAR tus EMOCIONES</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-top:5px;">Haga clic para inicializar la reproducción académica.</p>
             </div>
         </div>
     </div>
 
+</div>
+
+<!-- COMPONENTE MODAL -->
+<div class="modal-overlay" id="payment-modal">
+    <div class="modal-box">
+        <button class="modal-close" id="close-gateway-btn">&times;</button>
+        <h3 style="margin-top: 0; color: #fff; font-size: 1.4rem; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">Pasarela de Cobro de Prueba (Simulador)</h3>
+        
+        <form id="simulated-payment-form" style="margin-top: 20px;">
+            <div style="font-weight: 600; color: var(--accent-blue); font-size: 0.9rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px;">1. Datos Personales y de Despacho</div>
+            
+            <div class="form-group">
+                <label for="usr-name">Nombre Completo del Solicitante</label>
+                <input type="text" id="usr-name" placeholder="Ej. Carlos Mendoza Ortiz" required>
+            </div>
+            <div class="form-group">
+                <label for="usr-email">Dirección de Correo Electrónico Universitario</label>
+                <input type="email" id="usr-email" placeholder="Ej. cmendoza@universidad.edu.ec" required>
+            </div>
+            <div class="form-group">
+                <label for="usr-address">Dirección de Envío Domiciliario</label>
+                <input type="text" id="usr-address" placeholder="Calle Secundaria N-45 y Avenida Principal" required>
+            </div>
+
+            <div style="font-weight: 600; color: var(--accent-blue); font-size: 0.9rem; margin: 25px 0 15px 0; text-transform: uppercase; letter-spacing: 0.5px;">2. Información Financiera (Simulador Integrado)</div>
+
+            <div class="form-group">
+                <label for="card-number">Número de Tarjeta de Crédito/Débito</label>
+                <input type="text" id="card-number" placeholder="4000 1234 5678 9010" maxlength="19" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="card-date">Fecha de Caducidad</label>
+                    <input type="text" id="card-date" placeholder="MM/AA" maxlength="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-cvv">Código de Seguridad (CVV)</label>
+                    <input type="password" id="card-cvv" placeholder="123" maxlength="4" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;" id="submit-pay-btn">Confirmar y Procesar Pago ($15.00)</button>
+        </form>
+    </div>
 </div>
 
 <!-- AREA DE TOAST NOTIFICATIONS -->
@@ -589,7 +702,6 @@ document.querySelectorAll('.clinical-card').forEach(card => {
             title.textContent = data.titulo;
             text.textContent = data.texto;
             
-            // Manejo estricto del temporizador clínico
             clearInterval(countdownInstance);
             if (data.timer) {
                 timerBox.style.display = 'flex';
@@ -627,7 +739,6 @@ function runClinicalTimer(seconds) {
     countdownInstance = setInterval(refreshClock, 1000);
 }
 
-// Emisión de alertas institucionales controladas (Toasts profesionales)
 function pushNotification(message) {
     const box = document.getElementById('toast-manager');
     const toast = document.createElement('div');
@@ -639,16 +750,82 @@ function pushNotification(message) {
     setTimeout(() => {
         toast.style.animation = 'slideIn 0.2s ease reverse forwards';
         setTimeout(() => toast.remove(), 200);
-    }, 4500);
+    }, 5000);
 }
 
-// Inyección limpia de video institucional
-// REPRODUCTOR MULTIMEDIA CORREGIDO (MÉTODO SEGURO DE EMBED)
+// CONTROL DEL MODAL DE COBRO DE PRUEBA
+const paymentModal = document.getElementById('payment-modal');
+const openGatewayBtn = document.getElementById('open-gateway-btn');
+const closeGatewayBtn = document.getElementById('close-gateway-btn');
+const paymentForm = document.getElementById('simulated-payment-form');
+const submitPayBtn = document.getElementById('submit-pay-btn');
+
+if (openGatewayBtn) {
+    openGatewayBtn.addEventListener('click', () => {
+        paymentModal.style.display = 'flex';
+    });
+}
+
+if (closeGatewayBtn) {
+    closeGatewayBtn.addEventListener('click', () => {
+        paymentModal.style.display = 'none';
+    });
+}
+
+window.addEventListener('click', (e) => {
+    if (e.target === paymentModal) {
+        paymentModal.style.display = 'none';
+    }
+});
+
+if (paymentForm) {
+    paymentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        submitPayBtn.disabled = true;
+        submitPayBtn.textContent = "Verificando con la entidad bancaria...";
+        submitPayBtn.style.backgroundColor = "var(--text-muted)";
+
+        setTimeout(() => {
+            paymentModal.style.display = 'none';
+            pushNotification("💳 Pasarela: Conexión cifrada establecida con éxito.");
+            
+            setTimeout(() => {
+                pushNotification("🎉 Simulación Exitosa: Pago de $15.00 aprobado. Transacción registrada bajo el ID: #TXT-98246.");
+                
+                paymentForm.reset();
+                submitPayBtn.disabled = false;
+                submitPayBtn.textContent = "Confirmar y Procesar Pago ($15.00)";
+                submitPayBtn.style.backgroundColor = "var(--accent-blue)";
+            }, 1200);
+
+        }, 2500);
+    });
+}
+
+const cardInput = document.getElementById('card-number');
+if (cardInput) {
+    cardInput.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
+    });
+}
+
+const dateInput = document.getElementById('card-date');
+if (dateInput) {
+    dateInput.addEventListener('input', (e) => {
+        let val = e.target.value.replace(/[^\d]/g, '');
+        if (val.length > 2) {
+            val = val.substring(0, 2) + '/' + val.substring(2, 4);
+        }
+        e.target.value = val;
+    });
+}
+
+// REPRODUCTOR MULTIMEDIA CORREGIDO (EVITA RECHAZO DE CONEXIÓN LOCAL)
 const videoBtn = document.getElementById('video-clinical-trigger');
 if (videoBtn) {
     videoBtn.addEventListener('click', () => {
         const container = document.querySelector('.video-container');
-        // Agregamos parámetros avanzados para evitar el rechazo de conexión en local
         container.innerHTML = `
             <iframe 
                 src="https://www.youtube-nocookie.com/embed/xuU_cCFOFA0?autoplay=1&start=36" 
@@ -662,13 +839,6 @@ if (videoBtn) {
         pushNotification("🎥 Inicializando reproducción del microdocumental académico...");
     });
 }
-
-// Conexión de disparadores para descargas de guías
-document.querySelectorAll('.dl-trigger').forEach(btn => {
-    btn.addEventListener('click', () => {
-        pushNotification("📄 Solicitud procesada. El servidor académico ha iniciado la transferencia segura del documento indexado en formato PDF.");
-    });
-});
 </script>
 </body>
 </html>
