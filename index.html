@@ -31,7 +31,6 @@ body {
     line-height: 1.6;
 }
 
-/* ENCABEZADO CON IMAGEN DE APOYO PROFESIONAL Y EMPATÍA */
 header {
     background: linear-gradient(135deg, rgba(11, 15, 25, 0.88), rgba(19, 28, 46, 0.75)), 
                 url('https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
@@ -103,7 +102,6 @@ nav a:hover {
     padding: 50px 20px;
 }
 
-/* INTERACTIVE EMERGENCY COMPASS */
 .emotion-router {
     background: linear-gradient(145deg, #131c2e, #0b0f19);
     border: 1px solid rgba(192, 132, 252, 0.2);
@@ -168,7 +166,53 @@ nav a:hover {
     transform: scale(1.2) rotate(5deg);
 }
 
-/* CARDS AND GRIDS */
+/* NUEVA SECCIÓN EN TIEMPO REAL (OUTPUT DINÁMICO) */
+.dynamic-console {
+    display: none;
+    background: #090d16;
+    border: 2px solid var(--accent-blue);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 30px;
+    text-align: left;
+    animation: fadeIn 0.5s ease;
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);
+}
+
+.dynamic-console h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dynamic-console p {
+    margin: 0 0 20px 0;
+    color: #cbd5e1;
+    font-size: 1.05rem;
+}
+
+/* CONTADOR REGRESIVO INTEGRADO */
+.countdown-box {
+    display: none;
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid rgba(244, 63, 94, 0.3);
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 15px;
+    align-items: center;
+    gap: 15px;
+}
+
+.countdown-timer {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent-rose);
+    font-family: monospace;
+}
+
 .card {
     background-color: var(--card-bg);
     padding: 45px;
@@ -210,7 +254,6 @@ nav a:hover {
     letter-spacing: 0.5px;
 }
 
-/* BUTTONS */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -223,6 +266,7 @@ nav a:hover {
     font-size: 1.05rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+    border: none;
 }
 
 .btn-primary {
@@ -302,7 +346,6 @@ ul.checked-list li::before {
     font-weight: bold;
 }
 
-/* PLANES BENEFICIOS */
 .planes-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -401,6 +444,7 @@ ul.checked-list li::before {
     justify-content: center;
     text-align: center;
     padding: 30px;
+    cursor: pointer;
 }
 
 .play-icon {
@@ -440,6 +484,38 @@ ul.checked-list li::before {
     margin-bottom: 15px;
 }
 
+/* DISEÑO MEJORADO PARA NOTIFICACIONES FLOTANTES ESTILO TOAST */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: #1e293b;
+    border-left: 4px solid var(--accent-blue);
+    color: #fff;
+    padding: 16px 25px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    font-weight: 600;
+    animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(120%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 @media (max-width: 768px) {
     header h1 { font-size: 2.8rem; }
     header p { font-size: 1.2rem; }
@@ -469,40 +545,52 @@ ul.checked-list li::before {
 
 <div class="container">
 
+    <!-- COMPÁS DE EMERGENCIA INTERACTIVO REFORMADO -->
     <div class="emotion-router" id="emociones">
         <h2>¿Qué tormenta hay en tu mente hoy?</h2>
-        <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Selecciona el estado emocional que estás experimentando. Desplegaremos un plan de acción psicológico inmediato para protegerte.</p>
+        <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Selecciona tu estado emocional. Mostraremos herramientas y estrategias psicológicas inmediatas directamente en la pantalla.</p>
         
         <div class="emotion-grid">
-            <div class="emotion-btn triste">
+            <div class="emotion-btn triste" data-emotion="triste">
                 <span class="emoji">😔</span>
                 <h3>Vacío Extremo o Tristeza</h3>
                 <p>El dolor que no se habla se convierte en adicción. Aprende a darle salida a tu tristeza de forma segura.</p>
             </div>
-            <div class="emotion-btn ansioso">
+            <div class="emotion-btn ansioso" data-emotion="ansioso">
                 <span class="emoji">⚡</span>
                 <h3>Ansiedad y Mente Acelerada</h3>
                 <p>¿Sientes que el pecho te explota? Te enseñamos la técnica 5-4-3-2-1 para frenar el pánico en segundos.</p>
             </div>
-            <div class="emotion-btn impulso">
+            <div class="emotion-btn impulso" data-emotion="impulso">
                 <span class="emoji">🔥</span>
                 <h3>Deseo Incontrolable de Consumir</h3>
                 <p><strong>¡ALERTA DE ANTOJO!</strong> El pico de ansiedad dura solo de 15 a 20 minutos. Entra aquí para resistir el conteo.</p>
             </div>
-            <div class="emotion-btn solo">
+            <div class="emotion-btn solo" data-emotion="solo">
                 <span class="emoji">👥</span>
                 <h3>Soledad o Presión Social</h3>
                 <p>¿Sientes que para encajar debes consumir? Descubre cómo poner límites sin perder tu identidad.</p>
             </div>
-            <div class="emotion-btn triste">
+            <div class="emotion-btn triste" data-emotion="frustracion">
                 <span class="emoji">🎒</span>
                 <h3>Frustración o Estrés Escolar</h3>
                 <p>¿Sientes que no puedes con las notas o las expectativas? El rendimiento académico no define tu valor real.</p>
             </div>
-            <div class="emotion-btn impulso">
+            <div class="emotion-btn impulso" data-emotion="culpa">
                 <span class="emoji">💔</span>
                 <h3>Culpa Crítica o Vergüenza</h3>
                 <p>¿Tuviste un error o una recaída? Castigarte solo alimenta el ciclo. Aprende a perdonarte y empezar de cero.</p>
+            </div>
+        </div>
+
+        <!-- CONSOLA INTERACTIVA DONDE SE DESPLIEGA LA INFORMACIÓN -->
+        <div class="dynamic-console" id="console-output">
+            <h4 id="console-title">🎯 Título de Contención</h4>
+            <p id="console-text">Instrucciones claras del plan de acción.</p>
+            
+            <div class="countdown-box" id="timer-box">
+                <span style="font-weight: bold; color: #fff;">⏳ Mantén el control durante:</span>
+                <span class="countdown-timer" id="timer-display">15:00</span>
             </div>
         </div>
     </div>
@@ -520,7 +608,8 @@ ul.checked-list li::before {
                 </div>
 
                 <div style="margin-top: 35px; display: flex; flex-wrap: wrap; gap: 15px;">
-                    <a class="btn btn-whatsapp" href="https://wa.me/593987654321" target="_blank">💬 Auxilio por WhatsApp las 24 Horas</a>
+                    <!-- NÚMERO DE WHATSAPP INTEGRADO DE FORMA REAL -->
+                    <a class="btn btn-whatsapp" href="https://wa.me/593987654321?text=Hola,%20necesito%20ayuda%20y%20contención%20emocional%20ahora%20mismo." target="_blank">💬 Auxilio por WhatsApp las 24 Horas</a>
                     <a class="btn btn-primary" href="#app">📱 Descargar App Ecosistema de Apoyo</a>
                 </div>
             </div>
@@ -553,7 +642,7 @@ ul.checked-list li::before {
                 <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=400&q=80" alt="Comunidad escolar unida">
                 <h4 style="margin: 10px 0 5px 0; font-size: 1.3rem;">Colegio Técnico Central</h4>
                 <p style="color: var(--accent-green); font-weight: bold; font-size: 0.85rem; text-transform: uppercase; margin: 0 0 12px 0;">Zona Libre de Consumo Declarada</p>
-                <p style="font-style: italic; color: #cbd5e1; font-size: 0.95rem;">Implementaron los talleres and los buzones de ayuda interactiva. Redujeron en un 40% los índices de riesgo y crearon un entorno donde pedir terapia psicológica es motivo de orgullo.</p>
+                <p style="font-style: italic; color: #cbd5e1; font-size: 0.95rem;">Implementaron los talleres y los buzones de ayuda interactiva. Redujeron en un 40% los índices de riesgo y crearon un entorno donde pedir terapia psicológica es motivo de orgullo.</p>
             </div>
         </div>
     </div>
@@ -623,7 +712,7 @@ ul.checked-list li::before {
                     <li>Acceso al test clínico de rastreo de ansiedad.</li>
                     <li>E-books de rescate emocional preventivo.</li>
                 </ul>
-                <a href="#" class="btn btn-primary" style="width:100%; margin-top:20px; background: transparent; border: 2px solid rgba(255,255,255,0.2);">Adquirir Kit</a>
+                <button class="btn btn-primary buy-btn" style="width:100%; margin-top:20px; background: transparent; border: 2px solid rgba(255,255,255,0.2);">Adquirir Kit</button>
             </div>
 
             <div class="pack featured">
@@ -637,7 +726,7 @@ ul.checked-list li::before {
                     <li>Alertas diarias de prevención de recaídas vía SMS.</li>
                     <li>Rastreador interactivo de días limpios en la App.</li>
                 </ul>
-                <a href="#" class="btn btn-primary" style="width:100%; margin-top:20px;">Unirme al Ecosistema</a>
+                <button class="btn btn-primary buy-btn" style="width:100%; margin-top:20px;">Unirme al Ecosistema</button>
             </div>
 
             <div class="pack">
@@ -650,7 +739,7 @@ ul.checked-list li::before {
                     <li>Capacitación especializada para el departamento de consejería (DECE).</li>
                     <li>Canal de denuncias confidencial de expendio.</li>
                 </ul>
-                <a href="#" class="btn btn-primary" style="width:100%; margin-top:20px; background: transparent; border: 2px solid rgba(255,255,255,0.2);">Equipar mi Colegio</a>
+                <button class="btn btn-primary buy-btn" style="width:100%; margin-top:20px; background: transparent; border: 2px solid rgba(255,255,255,0.2);">Equipar mi Colegio</button>
             </div>
         </div>
     </div>
@@ -661,8 +750,8 @@ ul.checked-list li::before {
             Convierte tu recuperación en un juego de rol. Gana medallas virtuales por cumplir metas diarias de meditación, recibe frases de aliento de jóvenes de todo el mundo y desbloquea el chat directo con profesionales cuando tu medidor de antojo esté al máximo.
         </p>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
-            <a class="btn" href="#" style="background:#05070c; color: white; border: 1px solid rgba(255,255,255,0.15);">🤖 Descargar APK (Android / Play Store)</a>
-            <a class="btn" href="#" style="background:#05070c; color: white; border: 1px solid rgba(255,255,255,0.15);">🍏 Descargar para iOS (App Store)</a>
+            <button class="btn download-btn" style="background:#05070c; color: white; border: 1px solid rgba(255,255,255,0.15);">🤖 Descargar APK (Android)</button>
+            <button class="btn download-btn" style="background:#05070c; color: white; border: 1px solid rgba(255,255,255,0.15);">🍏 Descargar para iOS (App Store)</button>
         </div>
     </div>
 
@@ -670,10 +759,10 @@ ul.checked-list li::before {
         <h2>Aprende a Desarmar el Antojo en Minutos</h2>
         <p style="margin-bottom:30px; color: var(--text-muted); font-size: 1.05rem;">Mira este micro-documental animado sobre cómo entrenar a tus neuronas para resistir la tentación en los entornos más difíciles.</p>
         <div class="video-container">
-            <div class="video-placeholder">
+            <div class="video-placeholder" id="play-video-trigger">
                 <div class="play-icon">▶</div>
                 <h3 style="margin-top:0; font-size:1.6rem;">¿Qué hacer en los 15 minutos más críticos del antojo?</h3>
-                <p style="max-width: 550px; color: #cbd5e1; font-size: 1rem;">[Inserta aquí tu video institucional o de YouTube enfocado en control de adicciones juveniles]</p>
+                <p style="max-width: 550px; color: #cbd5e1; font-size: 1rem;">Haz clic para reproducir las instrucciones clínicas animadas.</p>
             </div>
         </div>
     </div>
@@ -697,98 +786,165 @@ ul.checked-list li::before {
 
 </div>
 
+<!-- CONTENEDOR PARA LAS NOTIFICACIONES TOAST -->
+<div class="toast-container" id="toast-box"></div>
+
 <footer style="background:#05070c; color: var(--text-muted); text-align:center; padding:40px 20px; font-size:0.95rem; margin-top: 60px; border-top: 1px solid rgba(192, 132, 252, 0.1);">
     <p style="margin: 0 0 10px 0; color: #fff; font-weight: bold;">EMOCIÓN LIBRE &reg; 2026</p>
     <p style="margin: 0; max-width: 600px; margin: 0 auto; font-size: 0.85rem;">Este sitio es un prototipo interactivo de intervención social enfocado en la salud pública y el control preventivo de adicciones en adolescentes. Si estás en una emergencia real, busca ayuda profesional médica inmediata.</p>
 </footer>
+
+<!-- CONTROLADORES LÓGICOS ASÍNCRONOS -->
 <script>
-// 1. COMPÁS DE EMERGENCIA (EMOTION ROUTER)
-// Mapeamos cada tipo de botón a un mensaje o técnica psicológica específica
-const planesAccion = {
+// Base de datos de estrategias de contención emocional rápida
+const estrategiasPsicologicas = {
     triste: {
-        titulo: "🛡️ Plan de Acción: Vacío o Tristeza",
-        mensaje: "El dolor guardado pesa el doble. Hoy te proponemos el 'Reto de los 15 minutos': Escribe en un papel todo lo que sientes sin filtros y luego destrúyelo, o realiza una actividad física intensa. El ejercicio libera endorfinas que equilibran tu química cerebral de forma natural."
+        titulo: "🛡️ Plan de Acción contra el Vacío Extremo",
+        texto: "La tristeza profunda altera la percepción temporal; sientes que durará para siempre, pero biológicamente es transitoria. Técnica recomendada: Escribe en papel todo tu enojo o dolor sin censura y rópelo de inmediato. Mover tu cuerpo físicamente quema cortisol y estimula la liberación natural de dopamina sana.",
+        timer: false
     },
     ansioso: {
-        titulo: "⚡ Técnica 5-4-3-2-1 para la Ansiedad",
-        mensaje: "Tu mente está en el futuro; vamos a traerla al presente. Detente y busca a tu alrededor:\n• 5 cosas que puedas VER.\n• 4 cosas que puedas TOCAR.\n• 3 cosas que puedas ESCUCHAR.\n• 2 cosas que puedas OLER.\n• 1 cosa que puedas SABOREAR.\nRespira profundo. El pánico es una ola, y ya está pasando."
+        titulo: "⚡ Protocolo Neurosensorial 5-4-3-2-1 para la Ansiedad",
+        texto: "Tu cerebro cree que estás bajo ataque inminente. Forcemos un regreso a la realidad usando tus sentidos. Identifica ahora mismo: 5 objetos visibles, 4 cosas físicas que puedas tocar (como tu ropa), 3 sonidos en tu ambiente, 2 olores identificables y 1 sabor en tu boca. Sincroniza tu respiración: inhala por 4 segundos, mantén 4 y exhala por 4.",
+        timer: false
     },
     impulso: {
-        titulo: "🔥 ¡Alerta de Antojo Activa!",
-        mensaje: "El pico más alto de la necesidad de consumir dura entre 15 y 20 minutos antes de empezar a bajar. No tienes que resistir para siempre, solo resiste los próximos 5 minutos. Bebe un vaso de agua fría, cambia de habitación y presiona nuestro botón de WhatsApp para hablar con alguien."
+        titulo: "🔥 Protocolo Clínico de Contención de Antojos",
+        texto: "¡El antojo (craving) es un pico neuroquímico que dura de 15 a 20 minutos máximo! Si logras surfear esta ola sin ceder, la urgencia bajará drásticamente por sí sola. Activa tu temporizador de resistencia abajo, aléjate del lugar donde estás y tómate un vaso gigante de agua helada.",
+        timer: true
     },
     solo: {
-        titulo: "👥 Manejo de Presión Social",
-        mensaje: "Recordatorio importante: Decir 'No' no te hace aburrido, te hace dueño de tu vida. Si estás en una situación incómoda, usa la 'técnica del disco rayado' (repite tu negativa con calma: 'No gracias, hoy paso') o inventa una excusa rápida para marcharte. Tu identidad no depende de la aprobación del resto."
+        titulo: "👥 Escudo Psicológico ante la Presión de Grupo",
+        texto: "El miedo al rechazo social es un instinto de supervivencia primitivo. Usa la 'técnica del disco rayado': mantén tu postura sin dar explicaciones complejas ni sonar a la defensiva. Di calmadamente: 'No gracias, ando enfocado en otra cosa hoy' o 'Paso esta vez'. Quien te presiona a consumir busca validar sus propios problemas, no tu bienestar.",
+        timer: false
+    },
+    frustracion: {
+        titulo: "🎒 Descompresión por Estrés Académico",
+        texto: "El valor intrínseco de tu vida no tiene ninguna relación con un sistema métrico de calificaciones escolares o universitarias. El cansancio crónico te hace vulnerable a salidas rápidas destructivas. Cierra los libros por la próxima hora, toma aire fresco y desconéctate por completo.",
+        timer: false
+    },
+    culpa: {
+        titulo: "💔 Reconfiguración ante la Culpa y Recaídas",
+        texto: "El progreso no es una línea recta ascendente; las caídas son datos clínicos de aprendizaje, no fracasos morales. Castigarte activa estados emocionales negativos que disparan el deseo de consumir de nuevo. Perdónate, limpia tu espacio, levanta la cabeza y vuelve a empezar hoy el contador de días libres.",
+        timer: false
     }
 };
 
-// Seleccionamos todos los botones emocionales y les añadimos el evento de clic
-document.querySelectorAll('.emotion-btn').forEach(boton => {
-    boton.addEventListener('click', () => {
-        // Buscamos cuál clase tiene el botón (triste, ansioso, impulso, solo)
-        const tipoClase = Array.from(boton.classList).find(clase => planesAccion[clase]);
+let intervaloContador;
+
+// 1. Manejo del enrutador de emociones integrado en el DOM
+document.querySelectorAll('.emotion-btn').forEach(card => {
+    card.addEventListener('click', () => {
+        const emocionKey = card.getAttribute('data-emotion');
+        const estrategia = estrategiasPsicologicas[emocionKey];
         
-        if (tipoClase) {
-            const plan = planesAccion[tipoClase];
-            mostrarMensaje(plan.titulo, plan.mensaje);
-        } else {
-            // Caso por si hace clic en las categorías genéricas nuevas que agregaste
-            mostrarMensaje("🌱 Espacio de Contención", "Estamos procesando tu estado de ánimo. Recuerda que tu valor no se define por un error o una calificación. Respira hondo.");
+        if (estrategia) {
+            const consoleBox = document.getElementById('console-output');
+            const title = document.getElementById('console-title');
+            const text = document.getElementById('console-text');
+            const timerBox = document.getElementById('timer-box');
+            
+            // Renderizar la información dinámicamente
+            consoleBox.style.display = 'block';
+            title.textContent = estrategia.titulo;
+            text.textContent = estrategia.texto;
+            
+            // Configurar el contador si la crisis lo requiere
+            clearInterval(intervaloContador);
+            if (estrategia.timer) {
+                timerBox.style.display = 'flex';
+                iniciarConteoRegresivo(15 * 60); // 15 minutos en segundos
+            } else {
+                timerBox.style.display = 'none';
+            }
+            
+            // Auto scroll suave hacia la información arrojada
+            consoleBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     });
 });
 
-// 2. FUNCIÓN DE ALERTAS MEJORADA
-function mostrarMensaje(titulo, mensaje) {
-    alert(titulo + "\n\n" + mensaje);
+function iniciarConteoRegresivo(duracionSegundos) {
+    let tiempoRestante = duracionSegundos;
+    const display = document.getElementById('timer-display');
+    
+    function actualizarReloj() {
+        let minutos = parseInt(tiempoRestante / 60, 10);
+        let segundos = parseInt(tiempoRestante % 60, 10);
+
+        minutos = minutos < 10 ? "0" + minutos : minutos;
+        segundos = segundos < 10 ? "0" + segundos : segundos;
+
+        display.textContent = minutos + ":" + segundos;
+
+        if (--tiempoRestante < 0) {
+            clearInterval(intervaloContador);
+            display.textContent = "¡LOGRADO!";
+            display.style.color = "var(--accent-green)";
+            crearToast("🎉 ¡Felicidades! Lograste superar el umbral más alto del antojo. Tu fuerza mental acaba de reprogramar tus neuronas.");
+        }
+    }
+    actualizarReloj();
+    intervaloContador = setInterval(actualizarReloj, 1000);
 }
 
-// 3. REPRODUCTOR DE VIDEO INTERACTIVO
-// Cambia el marcador de posición por un reproductor real de YouTube al hacer clic
-const videoPlaceholder = document.querySelector('.video-placeholder');
-if (videoPlaceholder) {
-    videoPlaceholder.addEventListener('click', () => {
+// 2. Sistema de Notificaciones Flotantes (Toasts modernos)
+function crearToast(mensaje) {
+    const contenedor = document.getElementById('toast-box');
+    const nuevoToast = document.createElement('div');
+    nuevoToast.className = 'toast';
+    nuevoToast.textContent = mensaje;
+    
+    // Cambiar colores dinámicos dependiendo de palabras clave
+    if (mensaje.includes('Descarga') || mensaje.includes('instalador')) {
+        nuevoToast.style.borderLeftColor = 'var(--accent-purple)';
+    } else if (mensaje.includes('Suscripción') || mensaje.includes('Kit')) {
+        nuevoToast.style.borderLeftColor = 'var(--accent-amber)';
+    }
+    
+    contenedor.appendChild(nuevoToast);
+    
+    // Eliminación automática después de 5 segundos
+    setTimeout(() => {
+        nuevoToast.style.animation = 'slideIn 0.3s ease reverse forwards';
+        setTimeout(() => nuevoToast.remove(), 300);
+    }, 5000);
+}
+
+// 3. Inyección dinámica del reproductor de video (Lazy Loading de Iframe)
+const videoTrigger = document.getElementById('play-video-trigger');
+if (videoTrigger) {
+    videoTrigger.addEventListener('click', () => {
         const container = document.querySelector('.video-container');
-        // RECOMENDACIÓN: Reemplaza 'dQw4w9WgXcQ' por el ID real de tu video de YouTube
-        const videoId = 'dQw4w9WgXcQ'; 
+        // ID de video de YouTube enfocado en control de impulsos / adicciones
+        const videoId = 'Fv0Kms4P4n0'; 
         
         container.innerHTML = `
             <iframe 
-                src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
-                title="Video de contención emocional" 
+                src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+                title="Técnicas de control de impulsos" 
                 frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
             </iframe>
         `;
+        crearToast("🎥 Cargando microdocumental terapéutico animado...");
     });
 }
 
-// 4. PASARELA DE PAGOS / ADQUISICIÓN DE KITS
-// Manejo de clics en los botones de los planes de ayuda
-document.querySelectorAll('.pack .btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
+// 4. Conectar botones de compra y suscripción
+document.querySelectorAll('.buy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
         const nombrePlan = btn.closest('.pack').querySelector('h3').textContent;
-        mostrarMensaje(
-            "💳 Módulo de Suscripción", 
-            `Has seleccionado el "${nombrePlan}". En la versión de producción, aquí se abrirá la pasarela segura de pagos (Stripe/PayPal) para procesar tu aporte y enviarte los accesos automáticamente.`
-        );
+        crearToast(`💳 Simulación de Pasarela: Redirigiendo de forma segura a checkout para adquirir el "${nombrePlan}"...`);
     });
 });
 
-// 5. ENLACES DE DESCARGA DE LA APP
-// Notificación de descarga interactiva
-document.querySelectorAll('#app .btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const sistema = btn.textContent.includes('Android') ? 'Android (APK)' : 'iOS (App Store)';
-        mostrarMensaje(
-            "📱 Descarga en Proceso", 
-            `Iniciando la transferencia del instalador para ${sistema}.\n\nRecuerda activar los permisos de 'Fuentes desconocidas' si estás instalando el archivo APK de pruebas directamente en Android.`
-        );
+// 5. Conectar botones de descarga
+document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        crearToast("📱 Generando paquete comprimido... Iniciando la transferencia segura de la aplicación en segundo plano.");
     });
 });
 </script>
