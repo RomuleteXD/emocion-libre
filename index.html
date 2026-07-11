@@ -49,7 +49,7 @@ body {
 
 header {
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85)), 
-                url('https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+                url('https://picsum.photos/id/180/1600/900') center/cover no-repeat;
     text-align: center;
     padding: 100px 20px;
     border-bottom: 1px solid var(--border-color);
@@ -413,6 +413,7 @@ ul.clean-list li::before {
     animation: slideIn 0.2s ease forwards;
 }
 
+/* CONTENEDOR DEL VIDEO CORREGIDO */
 .video-container {
     position: relative;
     padding-bottom: 56.25%;
@@ -420,18 +421,25 @@ ul.clean-list li::before {
     overflow: hidden;
     border-radius: 12px;
     background: #0f172a;
+    border: 1px solid var(--border-color);
 }
 
 .video-cover {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.9)), 
-                url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80') center/cover;
+    background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.95)), 
+                url('https://picsum.photos/id/60/1000/600') center/cover;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.video-cover:hover {
+    background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.85)), 
+                url('https://picsum.photos/id/60/1000/600') center/cover;
 }
 
 @keyframes slideIn {
@@ -597,13 +605,13 @@ ul.clean-list li::before {
         </div>
     </div>
 
-    <!-- REPRODUCTOR MULTIMEDIA CORREGIDO CON EL VIDEO ENVIADO -->
+    <!-- REPRODUCTOR MULTIMEDIA CORREGIDO -->
     <div class="card">
         <h2>Material Audiovisual Psicoeducativo Integrado</h2>
         <p style="margin-bottom:25px; color: var(--text-muted);">Visualización del microdocumental clínico para el análisis del circuito de recompensa cerebral.</p>
         <div class="video-container">
             <div class="video-cover" id="video-clinical-trigger">
-                <div class="play-icon" style="font-size: 3rem; background: rgba(255,255,255,0.1); width: 80px; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:50%; margin-bottom:15px;">▶</div>
+                <div style="font-size: 3rem; background: rgba(56, 189, 248, 0.2); border: 2px solid var(--accent-blue); width: 80px; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:50%; margin-bottom:15px; color: var(--accent-blue);">▶</div>
                 <h3 style="margin:0; font-size:1.3rem; color:#fff;">El Cerebro Bajo los Efectos del Consumo</h3>
                 <p style="color: var(--text-muted); font-size: 0.95rem; margin-top:5px;">Haga clic para inicializar la reproducción académica.</p>
             </div>
@@ -705,7 +713,6 @@ document.querySelectorAll('.clinical-card').forEach(card => {
             title.textContent = data.titulo;
             text.textContent = data.texto;
             
-            // Manejo estricto del temporizador clínico
             clearInterval(countdownInstance);
             if (data.timer) {
                 timerBox.style.display = 'flex';
@@ -743,7 +750,6 @@ function runClinicalTimer(seconds) {
     countdownInstance = setInterval(refreshClock, 1000);
 }
 
-// Emisión de alertas institucionales controladas (Toasts)
 function pushNotification(message) {
     const box = document.getElementById('toast-manager');
     const toast = document.createElement('div');
@@ -758,7 +764,7 @@ function pushNotification(message) {
     }, 5000);
 }
 
-// LÓGICA DE CONTROL DEL MODAL DE COBRO DE PRUEBA
+// CONTROL DEL MODAL DE COBRO DE PRUEBA
 const paymentModal = document.getElementById('payment-modal');
 const openGatewayBtn = document.getElementById('open-gateway-btn');
 const closeGatewayBtn = document.getElementById('close-gateway-btn');
@@ -773,14 +779,12 @@ closeGatewayBtn.addEventListener('click', () => {
     paymentModal.style.display = 'none';
 });
 
-// Cerrar el modal al hacer click fuera del recuadro
 window.addEventListener('click', (e) => {
     if (e.target === paymentModal) {
         paymentModal.style.display = 'none';
     }
 });
 
-// Procesamiento simulado del formulario de pasarela
 paymentForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
@@ -789,14 +793,12 @@ paymentForm.addEventListener('submit', (e) => {
     submitPayBtn.style.backgroundColor = "var(--text-muted)";
 
     setTimeout(() => {
-        // Simulación de transacción exitosa tras 2.5 segundos de carga
         paymentModal.style.display = 'none';
         pushNotification("💳 Pasarela: Conexión cifrada establecida con éxito.");
         
         setTimeout(() => {
             pushNotification("🎉 Simulación Exitosa: Pago de $15.00 aprobado. Transacción registrada bajo el ID: #TXT-98246.");
             
-            // Limpieza del formulario
             paymentForm.reset();
             submitPayBtn.disabled = false;
             submitPayBtn.textContent = "Confirmar y Procesar Pago ($15.00)";
@@ -806,7 +808,6 @@ paymentForm.addEventListener('submit', (e) => {
     }, 2500);
 });
 
-// Formateadores estéticos simples para inputs del simulador
 document.getElementById('card-number').addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
 });
@@ -819,25 +820,23 @@ document.getElementById('card-date').addEventListener('input', (e) => {
     e.target.value = val;
 });
 
-// REPRODUCTOR MULTIMEDIA ASOCIADO AL VIDEO SOLICITADO
+// REPRODUCTOR MULTIMEDIA CORREGIDO (MÉTODO SEGURO DE EMBED)
 const videoBtn = document.getElementById('video-clinical-trigger');
 if (videoBtn) {
     videoBtn.addEventListener('click', () => {
         const container = document.querySelector('.video-container');
-        // ID exacto extraído de tu URL: xuU_cCFOFA0 con el inicio en el segundo 36 (t=36)
-        const videoId = 'xuU_cCFOFA0'; 
-        
+        // Usamos el ID del video y forzamos la carga limpia eliminando capas previas
         container.innerHTML = `
             <iframe 
-                src="https://www.youtube.com/embed/${videoId}?autoplay=1&start=36&rel=0" 
+                src="https://www.youtube.com/embed/xuU_cCFOFA0?autoplay=1&start=36" 
                 title="Material Clínico Integrado" 
                 frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
             </iframe>
         `;
-        pushNotification("🎥 Inicializando el streaming del módulo multimedia indexado por el investigador...");
+        pushNotification("🎥 Inicializando reproducción del microdocumental académico...");
     });
 }
 </script>
