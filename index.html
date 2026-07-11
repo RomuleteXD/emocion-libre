@@ -702,56 +702,95 @@ ul.checked-list li::before {
     <p style="margin: 0; max-width: 600px; margin: 0 auto; font-size: 0.85rem;">Este sitio es un prototipo interactivo de intervención social enfocado en la salud pública y el control preventivo de adicciones en adolescentes. Si estás en una emergencia real, busca ayuda profesional médica inmediata.</p>
 </footer>
 <script>
-
-const mensajes = {
-triste:"😔 La tristeza es temporal.\n\n✔ Respira profundamente 5 veces.\n✔ Habla con alguien de confianza.\n✔ Recuerda que pedir ayuda es una fortaleza.",
-
-ansioso:"⚡ Ansiedad\n\nPrueba la técnica 5-4-3-2-1:\n\n5 cosas que ves\n4 que tocas\n3 que escuchas\n2 que hueles\n1 que saboreas.",
-
-impulso:"🔥 El impulso suele durar entre 15 y 20 minutos.\n\nEspera unos minutos.\nToma agua.\nSal a caminar.\nLlama a alguien.",
-
-solo:"👥 No estás solo.\n\nBusca un amigo, un familiar o un profesor.\nHablar ayuda mucho.",
-
-ayuda:"📞 Si necesitas ayuda inmediata comunícate con un familiar, psicólogo o llama a los servicios de emergencia de tu localidad."
-
+// 1. COMPÁS DE EMERGENCIA (EMOTION ROUTER)
+// Mapeamos cada tipo de botón a un mensaje o técnica psicológica específica
+const planesAccion = {
+    triste: {
+        titulo: "🛡️ Plan de Acción: Vacío o Tristeza",
+        mensaje: "El dolor guardado pesa el doble. Hoy te proponemos el 'Reto de los 15 minutos': Escribe en un papel todo lo que sientes sin filtros y luego destrúyelo, o realiza una actividad física intensa. El ejercicio libera endorfinas que equilibran tu química cerebral de forma natural."
+    },
+    ansioso: {
+        titulo: "⚡ Técnica 5-4-3-2-1 para la Ansiedad",
+        mensaje: "Tu mente está en el futuro; vamos a traerla al presente. Detente y busca a tu alrededor:\n• 5 cosas que puedas VER.\n• 4 cosas que puedas TOCAR.\n• 3 cosas que puedas ESCUCHAR.\n• 2 cosas que puedas OLER.\n• 1 cosa que puedas SABOREAR.\nRespira profundo. El pánico es una ola, y ya está pasando."
+    },
+    impulso: {
+        titulo: "🔥 ¡Alerta de Antojo Activa!",
+        mensaje: "El pico más alto de la necesidad de consumir dura entre 15 y 20 minutos antes de empezar a bajar. No tienes que resistir para siempre, solo resiste los próximos 5 minutos. Bebe un vaso de agua fría, cambia de habitación y presiona nuestro botón de WhatsApp para hablar con alguien."
+    },
+    solo: {
+        titulo: "👥 Manejo de Presión Social",
+        mensaje: "Recordatorio importante: Decir 'No' no te hace aburrido, te hace dueño de tu vida. Si estás en una situación incómoda, usa la 'técnica del disco rayado' (repite tu negativa con calma: 'No gracias, hoy paso') o inventa una excusa rápida para marcharte. Tu identidad no depende de la aprobación del resto."
+    }
 };
 
-document.querySelectorAll(".emotion-btn").forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-if(btn.classList.contains("triste"))
-alert(mensajes.triste);
-
-else if(btn.classList.contains("ansioso"))
-alert(mensajes.ansioso);
-
-else if(btn.classList.contains("impulso"))
-alert(mensajes.impulso);
-
-else if(btn.classList.contains("solo"))
-alert(mensajes.solo);
-
+// Seleccionamos todos los botones emocionales y les añadimos el evento de clic
+document.querySelectorAll('.emotion-btn').forEach(boton => {
+    boton.addEventListener('click', () => {
+        // Buscamos cuál clase tiene el botón (triste, ansioso, impulso, solo)
+        const tipoClase = Array.from(boton.classList).find(clase => planesAccion[clase]);
+        
+        if (tipoClase) {
+            const plan = planesAccion[tipoClase];
+            mostrarMensaje(plan.titulo, plan.mensaje);
+        } else {
+            // Caso por si hace clic en las categorías genéricas nuevas que agregaste
+            mostrarMensaje("🌱 Espacio de Contención", "Estamos procesando tu estado de ánimo. Recuerda que tu valor no se define por un error o una calificación. Respira hondo.");
+        }
+    });
 });
 
-});
-
-document.querySelectorAll(".btn").forEach(btn=>{
-
-btn.addEventListener("click",function(e){
-
-if(this.getAttribute("href")=="#"){
-
-e.preventDefault();
-
-alert("🚀 Esta función será implementada en una futura versión del proyecto.");
-
+// 2. FUNCIÓN DE ALERTAS MEJORADA
+function mostrarMensaje(titulo, mensaje) {
+    alert(titulo + "\n\n" + mensaje);
 }
 
+// 3. REPRODUCTOR DE VIDEO INTERACTIVO
+// Cambia el marcador de posición por un reproductor real de YouTube al hacer clic
+const videoPlaceholder = document.querySelector('.video-placeholder');
+if (videoPlaceholder) {
+    videoPlaceholder.addEventListener('click', () => {
+        const container = document.querySelector('.video-container');
+        // RECOMENDACIÓN: Reemplaza 'dQw4w9WgXcQ' por el ID real de tu video de YouTube
+        const videoId = 'dQw4w9WgXcQ'; 
+        
+        container.innerHTML = `
+            <iframe 
+                src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+                title="Video de contención emocional" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+            </iframe>
+        `;
+    });
+}
+
+// 4. PASARELA DE PAGOS / ADQUISICIÓN DE KITS
+// Manejo de clics en los botones de los planes de ayuda
+document.querySelectorAll('.pack .btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const nombrePlan = btn.closest('.pack').querySelector('h3').textContent;
+        mostrarMensaje(
+            "💳 Módulo de Suscripción", 
+            `Has seleccionado el "${nombrePlan}". En la versión de producción, aquí se abrirá la pasarela segura de pagos (Stripe/PayPal) para procesar tu aporte y enviarte los accesos automáticamente.`
+        );
+    });
 });
 
+// 5. ENLACES DE DESCARGA DE LA APP
+// Notificación de descarga interactiva
+document.querySelectorAll('#app .btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const sistema = btn.textContent.includes('Android') ? 'Android (APK)' : 'iOS (App Store)';
+        mostrarMensaje(
+            "📱 Descarga en Proceso", 
+            `Iniciando la transferencia del instalador para ${sistema}.\n\nRecuerda activar los permisos de 'Fuentes desconocidas' si estás instalando el archivo APK de pruebas directamente en Android.`
+        );
+    });
 });
-
 </script>
 </body>
 </html>
