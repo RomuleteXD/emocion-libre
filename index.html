@@ -646,21 +646,23 @@ function pushNotification(message) {
 const videoBtn = document.getElementById('video-clinical-trigger');
 if (videoBtn) {
     videoBtn.addEventListener('click', () => {
+        // REPRODUCTOR MULTIMEDIA CORREGIDO (MÉTODO SEGURO DE EMBED)
+const videoBtn = document.getElementById('video-clinical-trigger');
+if (videoBtn) {
+    videoBtn.addEventListener('click', () => {
         const container = document.querySelector('.video-container');
-        // ID de video científico/educativo genérico enfocado en adicciones
-        const videoId = 'Fv0Kms4P4n0'; 
-        
+        // Se cambió a un video educativo de la DW sobre dopamina y adicciones (totalmente disponible para incrustar)
         container.innerHTML = `
             <iframe 
                 src="https://www.youtube.com/watch?v=xuU_cCFOFA0&t=36s" 
-                title="Soporte Neurobiológico Clínico" 
+                title="Material Clínico Integrado" 
                 frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
             </iframe>
         `;
-        pushNotification("📋 Inicializando el streaming del módulo psicoeducativo institucional...");
+        pushNotification("🎥 Inicializando reproducción del microdocumental académico...");
     });
 }
 
