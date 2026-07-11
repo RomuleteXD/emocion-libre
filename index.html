@@ -643,19 +643,16 @@ function pushNotification(message) {
 }
 
 // Inyección limpia de video institucional
-const videoBtn = document.getElementById('video-clinical-trigger');
-if (videoBtn) {
-    videoBtn.addEventListener('click', () => {
-        // REPRODUCTOR MULTIMEDIA CORREGIDO (MÉTODO SEGURO DE EMBED)
+// REPRODUCTOR MULTIMEDIA CORREGIDO (MÉTODO SEGURO DE EMBED)
 const videoBtn = document.getElementById('video-clinical-trigger');
 if (videoBtn) {
     videoBtn.addEventListener('click', () => {
         const container = document.querySelector('.video-container');
-        // Se cambió a un video educativo de la DW sobre dopamina y adicciones (totalmente disponible para incrustar)
+        // Agregamos parámetros avanzados para evitar el rechazo de conexión en local
         container.innerHTML = `
             <iframe 
-                src="https://www.youtube.com/watch?v=xuU_cCFOFA0&t=36s" 
-                title="Material Clínico Integrado" 
+                src="https://www.youtube-nocookie.com/embed/xuU_cCFOFA0?autoplay=1&start=36" 
+                title="Cómo REGULAR tus EMOCIONES" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen
