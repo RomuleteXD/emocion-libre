@@ -532,8 +532,8 @@ nav a:hover {
 </header>
 
 <nav>
-    <a href="#emociones">Auxilio Emocional</a>
     <a href="#callcenter">Call Center SOS</a>
+    <a href="#emociones">Auxilio Emocional</a>
     <a href="#noticias">Casos de Éxito</a>
     <a href="#videos-informativos">Vídeos de Apoyo</a>
     <a href="#info">¿Qué le pasa a mi mente?</a>
@@ -541,6 +541,30 @@ nav a:hover {
 </nav>
 
 <div class="container">
+
+    <!-- SECCIÓN DE CALL CENTER (AHORA PRIMERO) -->
+    <div class="card" id="callcenter" style="background: linear-gradient(135deg, #131c2e, #2e1322); border: 2px solid var(--accent-rose);">
+        <div class="grid-2" style="align-items: center;">
+            <div>
+                <span style="color: var(--accent-rose); font-weight: 800; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1.5px; display:block; margin-bottom:10px;">Línea Telefónica de Respuesta Inmediata</span>
+                <h2>Call Center Profesional 24/7</h2>
+                <p style="font-size: 1.15rem; color: #f1f5f9;">¿Prefieres escuchar una voz amiga en vez de escribir? Contamos con un equipo de psicólogos clínicos listos para intervenir en momentos críticos de desborde emocional.</p>
+                
+                <div class="call-center-box">
+                    <p style="margin: 0 0 10px 0; font-size: 1rem; color: #fff;"><span class="pulse-indicator"></span> <strong>Operadores Disponibles Ahora Mismo</strong></p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">Tu llamada es 100% anónima, confidencial y sin costo alguno.</p>
+                </div>
+
+                <div style="margin-top: 35px; display: flex; flex-wrap: wrap; gap: 15px;">
+                    <a class="btn btn-danger" href="tel:18005553662">📞 Llamar al Call Center Gratis</a>
+                    <a class="btn btn-whatsapp" href="https://wa.me/593987654321?text=Hola,%20necesito%20hablar%20con%20un%20operador%20del%20call%20center." target="_blank">💬 Solicitar llamada por WhatsApp</a>
+                </div>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=600&q=80" alt="Central de atención telefónica de emergencia" style="width:100%; border-radius:24px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);">
+            </div>
+        </div>
+    </div>
 
     <!-- COMPÁS DE EMERGENCIA INTERACTIVO -->
     <div class="emotion-router" id="emociones">
@@ -587,30 +611,6 @@ nav a:hover {
             <div class="countdown-box" id="timer-box">
                 <span style="font-weight: bold; color: #fff;">⏳ Mantén el control durante:</span>
                 <span class="countdown-timer" id="timer-display">15:00</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- CALL CENTER INTEGRADO -->
-    <div class="card" id="callcenter" style="background: linear-gradient(135deg, #131c2e, #2e1322); border: 2px solid var(--accent-rose);">
-        <div class="grid-2" style="align-items: center;">
-            <div>
-                <span style="color: var(--accent-rose); font-weight: 800; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1.5px; display:block; margin-bottom:10px;">Línea Telefónica de Respuesta Inmediata</span>
-                <h2>Call Center Profesional 24/7</h2>
-                <p style="font-size: 1.15rem; color: #f1f5f9;">¿Prefieres escuchar una voz amiga en vez de escribir? Contamos con un equipo de psicólogos clínicos listos para intervenir en momentos críticos de desborde emocional.</p>
-                
-                <div class="call-center-box">
-                    <p style="margin: 0 0 10px 0; font-size: 1rem; color: #fff;"><span class="pulse-indicator"></span> <strong>Operadores Disponibles Ahora Mismo</strong></p>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">Tu llamada es 100% anónima, confidencial y sin costo alguno.</p>
-                </div>
-
-                <div style="margin-top: 35px; display: flex; flex-wrap: wrap; gap: 15px;">
-                    <a class="btn btn-danger" href="tel:18005553662">📞 Llamar al Call Center Gratis</a>
-                    <a class="btn btn-whatsapp" href="https://wa.me/593987654321?text=Hola,%20necesito%20hablar%20con%20un%20operador%20del%20call%20center." target="_blank">💬 Solicitar llamada por WhatsApp</a>
-                </div>
-            </div>
-            <div>
-                <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=600&q=80" alt="Central de atención telefónica de emergencia" style="width:100%; border-radius:24px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);">
             </div>
         </div>
     </div>
@@ -743,7 +743,6 @@ const estrategiasPsicologicas = {
 
 let intervaloContador;
 
-// 1. Manejo del enrutador de emociones integrado en el DOM
 document.querySelectorAll('.emotion-btn').forEach(card => {
     card.addEventListener('click', () => {
         const emocionKey = card.getAttribute('data-emotion');
@@ -755,21 +754,18 @@ document.querySelectorAll('.emotion-btn').forEach(card => {
             const text = document.getElementById('console-text');
             const timerBox = document.getElementById('timer-box');
             
-            // Renderizar la información dinámicamente
             consoleBox.style.display = 'block';
             title.textContent = estrategia.titulo;
             text.textContent = estrategia.texto;
             
-            // Configurar el contador si la crisis lo requiere
             clearInterval(intervaloContador);
             if (estrategia.timer) {
                 timerBox.style.display = 'flex';
-                iniciarConteoRegresivo(15 * 60); // 15 minutos en segundos
+                iniciarConteoRegresivo(15 * 60);
             } else {
                 timerBox.style.display = 'none';
             }
             
-            // Auto scroll suave hacia la información arrojada
             consoleBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     });
@@ -783,7 +779,7 @@ function iniciarConteoRegresivo(duracionSegundos) {
         let minutos = parseInt(tiempoRestante / 60, 10);
         let segundos = parseInt(tiempoRestante % 60, 10);
 
-        minutos = minutes < 10 ? "0" + minutos : minutos;
+        minutos = minutos < 10 ? "0" + minutos : minutos;
         segundos = segundos < 10 ? "0" + segundos : segundos;
 
         display.textContent = minutos + ":" + segundos;
@@ -799,14 +795,12 @@ function iniciarConteoRegresivo(duracionSegundos) {
     intervaloContador = setInterval(actualizarReloj, 1000);
 }
 
-// 2. Sistema de Notificaciones Flotantes (Toasts modernos)
 function crearToast(mensaje) {
     const contenedor = document.getElementById('toast-box');
     const nuevoToast = document.createElement('div');
     nuevoToast.className = 'toast';
     nuevoToast.textContent = mensaje;
     
-    // Cambiar colores dinámicos dependiendo de palabras clave
     if (mensaje.includes('Descarga') || mensaje.includes('aplicación') || mensaje.includes('Generando')) {
         nuevoToast.style.borderLeftColor = 'var(--accent-purple)';
     } else if (mensaje.includes('checkout') || mensaje.includes('adquirir') || mensaje.includes('Plan')) {
@@ -815,14 +809,12 @@ function crearToast(mensaje) {
     
     contenedor.appendChild(nuevoToast);
     
-    // Eliminación automática después de 5 segundos
     setTimeout(() => {
         nuevoToast.style.animation = 'slideIn 0.3s ease reverse forwards';
         setTimeout(() => nuevoToast.remove(), 300);
     }, 5000);
 }
 
-// 3. Controlador de video embebido corregido (eliminado el error de pushNotification)
 const videoBtn = document.getElementById('video-clinical-trigger');
 if (videoBtn) {
     videoBtn.addEventListener('click', () => {
@@ -840,7 +832,6 @@ if (videoBtn) {
     });
 }
 
-// 4. Conectar botones de compra y suscripción
 document.querySelectorAll('.buy-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const nombrePlan = btn.closest('.pack').querySelector('h3').textContent;
@@ -848,7 +839,6 @@ document.querySelectorAll('.buy-btn').forEach(btn => {
     });
 });
 
-// 5. Conectar botones de descarga
 document.querySelectorAll('.download-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         crearToast("📱 Generando paquete comprimido... Iniciando la transferencia segura de la aplicación en segundo plano.");
