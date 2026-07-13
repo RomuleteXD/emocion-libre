@@ -316,7 +316,7 @@ nav a:hover {
     color: var(--text-muted);
 }
 
-/* ESTILOS DE LA ZONA DEL DIARIO */
+/* DIARIO */
 .diary-section {
     background: #0d1527;
     border: 1px solid rgba(56, 189, 248, 0.2);
@@ -403,6 +403,39 @@ nav a:hover {
     color: #e2e8f0;
     white-space: pre-wrap;
     font-size: 1rem;
+}
+
+/* NUEVOS ESTILOS: ZONA DE DESAHOGO EFÍMERO */
+.vent-section {
+    background: linear-gradient(145deg, #18111e, #0b0f19);
+    border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.vent-textarea {
+    width: 100%;
+    height: 200px;
+    background: #08060c;
+    border: 1px solid rgba(244, 63, 94, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    color: #ffd1d9;
+    font-family: inherit;
+    font-size: 1.1rem;
+    resize: none;
+    outline: none;
+    transition: all 0.5s ease;
+}
+
+.vent-textarea:focus {
+    border-color: var(--accent-rose);
+    box-shadow: 0 0 20px rgba(244, 63, 94, 0.15);
+}
+
+/* Animación de desvanecimiento de humo */
+.vent-burn-animation {
+    transform: scale(0.9) translateY(-30px);
+    opacity: 0 !important;
+    filter: blur(10px);
 }
 
 .btn {
@@ -667,11 +700,11 @@ nav a:hover {
 <nav>
     <a href="#callcenter">Call Center SOS</a>
     <a href="#emociones">Auxilio Emocional</a>
-    <a href="#diario">Diario de Descarga</a>
+    <a href="#diario">Diario Personal</a>
+    <a href="#desahogo">Zona de Desahogo</a>
     <a href="#noticias">Casos de Éxito</a>
     <a href="#videos-informativos">Vídeos de Apoyo</a>
     <a href="#info">¿Qué le pasa a mi mente?</a>
-    <a href="#beneficios">Soporte</a>
 </nav>
 
 <div class="container">
@@ -682,7 +715,7 @@ nav a:hover {
             <div>
                 <span style="color: var(--accent-rose); font-weight: 800; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1.5px; display:block; margin-bottom:10px;">Línea Telefónica de Respuesta Inmediata</span>
                 <h2>Call Center Profesional 24/7</h2>
-                <p style="font-size: 1.15rem; color: #f1f5f9;">¿Prefieres escuchar una voice amiga en vez de escribir? Contamos con un equipo de psicólogos clínicos listos para intervenir en momentos críticos de desborde emocional.</p>
+                <p style="font-size: 1.15rem; color: #f1f5f9;">¿Prefieres escuchar una voz amiga en vez de escribir? Contamos con un equipo de psicólogos clínicos listos para intervenir en momentos críticos de desborde emocional.</p>
                 
                 <div class="call-center-box">
                     <p style="margin: 0 0 10px 0; font-size: 1rem; color: #fff;"><span class="pulse-indicator"></span> <strong>Operadores Disponibles Ahora Mismo</strong></p>
@@ -749,33 +782,50 @@ nav a:hover {
         </div>
     </div>
 
-    <!-- NUEVA SECCIÓN: DIARIO VIVIR (DESCARGA EMOCIONAL) -->
+    <!-- DIARIO EMOCIONAL LOCAL -->
     <div class="card diary-section" id="diario">
         <h2>Diario Íntimo de Descarga Emocional</h2>
         <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;">
-            🔒 <strong>100% Confidencial y Seguro:</strong> Tus notas se guardan de forma local en tu propio dispositivo. Ningún servidor ni persona externa puede acceder a lo que escribes aquí. Úsalo para soltar tus cargas.
+            🔒 <strong>Historial de Bitácora Local:</strong> Tus notas se guardan ordenadas por fecha en tu navegador. Puedes usarlas para ver tu progreso día a día de forma privada.
         </p>
 
         <div style="margin-bottom: 15px; font-weight: 600; font-size: 1rem; color: #fff;">¿Cómo definirías tu estado de ánimo general hoy?</div>
         <div class="mood-selector" id="mood-container">
-            <div class="mood-opt" data-mood="Tranquilo / En Control">🌱 Tranquilo / En Control</div>
-            <div class="mood-opt" data-mood="Ansioso / Agobiado">⚡ Ansioso / Agobiado</div>
-            <div class="mood-opt" data-mood="Triste / Solitario">😔 Triste / Solitario</div>
-            <div class="mood-opt" data-mood="Irritable / Frustrado">🔥 Irritable / Frustrado</div>
-            <div class="mood-opt" data-mood="En Proceso de Recuperación">💪 En Recuperación</div>
+            <div class="mood-opt" data-mood="Tranquilo / En Control">🌱 Tranquilo</div>
+            <div class="mood-opt" data-mood="Ansioso / Agobiado">⚡ Ansioso</div>
+            <div class="mood-opt" data-mood="Triste / Solitario">😔 Triste</div>
+            <div class="mood-opt" data-mood="Irritable / Frustrado">🔥 Frustrado</div>
+            <div class="mood-opt" data-mood="En Recuperación">💪 En Recuperación</div>
         </div>
 
-        <textarea class="diary-textarea" id="diary-input" placeholder="Escribe libremente... ¿Qué te pasó hoy? ¿Qué emociones sentiste? ¿Cómo manejaste los impulsos? Desahógate sin juzgarte..."></textarea>
+        <textarea class="diary-textarea" id="diary-input" placeholder="Escribe algo sobre tu día que quieras recordar o analizar más tarde..."></textarea>
         
         <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 15px;">
             <button class="btn btn-primary" id="save-diary-btn">💾 Guardar en mi bitácora</button>
-            <button class="btn btn-secondary" id="clear-diary-btn">🗑️ Limpiar Historial del Dispositivo</button>
+            <button class="btn btn-secondary" id="clear-diary-btn">🗑️ Limpiar Historial</button>
         </div>
 
-        <div class="diary-history" id="diary-history-box">
-            <!-- Las entradas del diario se cargarán dinámicamente aquí -->
+        <div class="diary-history" id="diary-history-box"></div>
+    </div>
+
+
+    <!-- NUEVA SECCIÓN EXTRA: CUADRO DE DESAHOGO SIN FILTROS (EFÍMERO) -->
+    <div class="card vent-section" id="desahogo">
+        <h2>Sona de Desahogo Express: Suelta la Carga</h2>
+        <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;">
+            💨 <strong>Espacio Efímero de Catarsis:</strong> ¿Sientes rabia, miedo, desesperación o un impulso incontrolable justo ahora? Escríbelo todo aquí con total libertad. Esta caja **no guarda nada**. Cuando termines, presiona el botón para quemarlo y dejar ir ese peso mental.
+        </p>
+
+        <textarea class="vent-textarea" id="vent-input" placeholder="Escribe aquí tu rabia, tu dolor, tus malas palabras, lo que te guardas por miedo al qué dirán... Déjalo salir todo en este texto..."></textarea>
+        
+        <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.95rem;">
+                ✍️ Palabras escritas: <span id="vent-counter" style="color: var(--accent-rose); font-weight: bold;">0</span>
+            </div>
+            <button class="btn btn-danger" id="burn-btn" style="background: linear-gradient(135deg, #f43f5e, #991b1b);">🔥 Quemar y Liberar Mente</button>
         </div>
     </div>
+
 
     <!-- CASOS DE ÉXITO -->
     <div class="card" id="noticias">
@@ -802,7 +852,6 @@ nav a:hover {
         <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Micro-documentales y guías desarrolladas por neuropsicólogos para entender y desactivar los mecanismos de la ansiedad y los antojos emocionales.</p>
         
         <div class="video-grid">
-            <!-- Video 1 -->
             <div class="video-wrapper">
                 <div class="video-container" id="vid-regulation">
                     <div class="video-placeholder" style="background: linear-gradient(rgba(11,15,25,0.6), rgba(11,15,25,0.95)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80') center/cover;">
@@ -815,7 +864,6 @@ nav a:hover {
                 </div>
             </div>
 
-            <!-- Video 2 -->
             <div class="video-wrapper">
                 <div class="video-container" id="vid-craving">
                     <div class="video-placeholder" style="background: linear-gradient(rgba(11,15,25,0.6), rgba(11,15,25,0.95)), url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=500&q=80') center/cover;">
@@ -828,7 +876,6 @@ nav a:hover {
                 </div>
             </div>
 
-            <!-- Video 3 -->
             <div class="video-wrapper">
                 <div class="video-container" id="vid-anxiety">
                     <div class="video-placeholder" style="background: linear-gradient(rgba(11,15,25,0.6), rgba(11,15,25,0.95)), url('https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=500&q=80') center/cover;">
@@ -862,32 +909,6 @@ nav a:hover {
                         <p style="margin:0; font-size:0.9rem; color: var(--text-muted);">La mente busca alivio artificial inmediato para apagar el dolor.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- HERRAMIENTAS Y PLANES -->
-    <div class="card" id="beneficios">
-        <h2 style="display:block; text-align:center;">Herramientas Especializadas</h2>
-        <div class="planes-container">
-            <div class="pack featured">
-                <div class="badge">SOPORTE TERAPÉUTICO</div>
-                <h3>Plan Comunidad Activa</h3>
-                <div class="price">$20 <span>/ mes</span></div>
-                <ul>
-                    <li>Salas de terapia grupal anónimas.</li>
-                    <li>Rastreador interactivo de días limpios.</li>
-                </ul>
-                <button class="btn btn-primary buy-btn" style="width:100%; margin-top:20px;">Unirme</button>
-            </div>
-            <div class="pack">
-                <h3>Aplicación Móvil SOS</h3>
-                <div class="price">Gratis <span>v1.0</span></div>
-                <ul>
-                    <li>Botón de pánico y contención offline.</li>
-                    <li>Ejercicios de respiración guiados.</li>
-                </ul>
-                <button class="btn btn-primary download-btn" style="width:100%; margin-top:20px; background: var(--card-hover);">Descargar App</button>
             </div>
         </div>
     </div>
@@ -972,7 +993,7 @@ function iniciarConteoRegresivo(duracionSegundos) {
         let minutos = parseInt(tiempoRestante / 60, 10);
         let segundos = parseInt(tiempoRestante % 60, 10);
 
-        minutos = minutos < 10 ? "0" + minutos : minutos;
+        minutos = minutes < 10 ? "0" + minutos : minutos;
         segundos = segundos < 10 ? "0" + segundos : segundos;
 
         display.textContent = minutos + ":" + segundos;
@@ -994,10 +1015,8 @@ function crearToast(mensaje) {
     nuevoToast.className = 'toast';
     nuevoToast.textContent = mensaje;
     
-    if (mensaje.includes('Descarga') || mensaje.includes('aplicación') || mensaje.includes('Generando')) {
-        nuevoToast.style.borderLeftColor = 'var(--accent-purple)';
-    } else if (mensaje.includes('checkout') || mensaje.includes('adquirir') || mensaje.includes('Plan')) {
-        nuevoToast.style.borderLeftColor = 'var(--accent-amber)';
+    if (mensaje.includes('Desahogo') || mensaje.includes('liberada')) {
+        nuevoToast.style.borderLeftColor = 'var(--accent-rose)';
     } else if (mensaje.includes('Diario') || mensaje.includes('guardada')) {
         nuevoToast.style.borderLeftColor = 'var(--accent-green)';
     }
@@ -1010,7 +1029,7 @@ function crearToast(mensaje) {
     }, 5000);
 }
 
-// LÓGICA DEL DIARIO EMOCIONAL
+// DIARIO EMOCIONAL LOCAL
 let selectedMood = "";
 const moodElements = document.querySelectorAll('.mood-opt');
 
@@ -1054,48 +1073,72 @@ document.getElementById('save-diary-btn').addEventListener('click', () => {
         return;
     }
     if (!texto) {
-        crearToast("⚠️ La nota del diario está vacía. Escribe algo sobre tu día.");
+        crearToast("⚠️ La nota del diario está vacía.");
         return;
     }
 
     const opcionesFecha = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
     const ahora = new Date().toLocaleDateString('es-ES', opcionesFecha);
 
-    const nuevaEntrada = {
-        fecha: ahora,
-        animo: selectedMood,
-        texto: texto
-    };
-
+    const nuevaEntrada = { fecha: ahora, animo: selectedMood, texto: texto };
     const entradas = JSON.parse(localStorage.getItem('emocion_libre_diario')) || [];
     entradas.push(nuevaEntrada);
     localStorage.setItem('emocion_libre_diario', JSON.stringify(entradas));
 
-    // Limpiar campos
     document.getElementById('diary-input').value = "";
     moodElements.forEach(el => el.classList.remove('selected'));
     selectedMood = "";
-
-    crearToast("💾 Entrada de Diario guardada de forma segura en tu dispositivo.");
+    crearToast("💾 Entrada de Diario guardada de forma segura.");
     cargarDiario();
 });
 
 document.getElementById('clear-diary-btn').addEventListener('click', () => {
-    if (confirm("¿Estás seguro de que deseas eliminar permanentemente todas las notas de este diario de tu dispositivo? Esta acción no se puede deshacer.")) {
+    if (confirm("¿Deseas eliminar permanentemente todas las notas del diario local?")) {
         localStorage.removeItem('emocion_libre_diario');
-        crearToast("🗑️ Todo el historial de notas locales ha sido eliminado.");
+        crearToast("🗑️ Historial de notas locales eliminado.");
         cargarDiario();
     }
 });
 
-// Inicializar el diario al cargar la página
+
+// LÓGICA DE LA ZONA DE DESAHOGO EXPRESS
+const ventInput = document.getElementById('vent-input');
+const ventCounter = document.getElementById('vent-counter');
+const burnBtn = document.getElementById('burn-btn');
+
+ventInput.addEventListener('input', () => {
+    const texto = ventInput.value.trim();
+    const numeroPalabras = texto === "" ? 0 : texto.split(/\s+/).length;
+    ventCounter.textContent = numeroPalabras;
+});
+
+burnBtn.addEventListener('click', () => {
+    const texto = ventInput.value.trim();
+    if (!texto) {
+        crearToast("⚠️ No hay nada escrito para desahogar todavía. ¡Sueltalo todo!");
+        return;
+    }
+
+    // Animación de desvanecimiento
+    ventInput.classList.add('vent-burn-animation');
+
+    setTimeout(() => {
+        ventInput.value = "";
+        ventCounter.textContent = "0";
+        ventInput.classList.remove('vent-burn-animation');
+        crearToast("🔥 ¡Desahogo Completado! Tu texto ha sido destruido por completo. Tu mente está ahora más ligera.");
+    }, 600);
+});
+
+
+// Inicializar componentes
 cargarDiario();
 
 // Configuración de los 3 videos dinámicos
 const videosConfig = {
-    'vid-regulation': { embed: 'xuU_cCFOFA0?start=36', toast: '🎥 Inicializando microdocumental sobre regulación de emociones...' },
-    'vid-craving': { embed: '4t963m_F780', toast: '🎥 Cargando recurso clínico sobre contención de impulsos y dopamina...' },
-    'vid-anxiety': { embed: 'm1M8S9G8V9w', toast: '🎥 Abriendo guía interactiva sobre el manejo neurosensorial de la ansiedad...' }
+    'vid-regulation': { embed: 'xuU_cCFOFA0?start=36', toast: '🎥 Inicializando microdocumental...' },
+    'vid-craving': { embed: '4t963m_F780', toast: '🎥 Cargando recurso clínico...' },
+    'vid-anxiety': { embed: 'm1M8S9G8V9w', toast: '🎥 Abriendo guía interactiva...' }
 };
 
 Object.keys(videosConfig).forEach(id => {
@@ -1116,19 +1159,6 @@ Object.keys(videosConfig).forEach(id => {
             crearToast(config.toast);
         });
     }
-});
-
-document.querySelectorAll('.buy-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const nombrePlan = btn.closest('.pack').querySelector('h3').textContent;
-        crearToast(`💳 Simulación de Pasarela: Redirigiendo de forma segura a checkout para adquirir el "${nombrePlan}"...`);
-    });
-});
-
-document.querySelectorAll('.download-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        crearToast("📱 Generando paquete comprimido... Iniciando la transferencia segura de la aplicación en segundo plano.");
-    });
 });
 </script>
 </body>
