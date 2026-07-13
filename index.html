@@ -405,7 +405,7 @@ nav a:hover {
     font-size: 1rem;
 }
 
-/* NUEVOS ESTILOS: ZONA DE DESAHOGO EFÍMERO */
+/* ZONA DE DESAHOGO EFÍMERO */
 .vent-section {
     background: linear-gradient(145deg, #18111e, #0b0f19);
     border: 1px solid rgba(244, 63, 94, 0.2);
@@ -431,13 +431,13 @@ nav a:hover {
     box-shadow: 0 0 20px rgba(244, 63, 94, 0.15);
 }
 
-/* Animación de desvanecimiento de humo */
 .vent-burn-animation {
     transform: scale(0.9) translateY(-30px);
     opacity: 0 !important;
     filter: blur(10px);
 }
 
+/* BOTONES */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -499,36 +499,7 @@ nav a:hover {
     transform: translateY(-3px);
 }
 
-.timeline {
-    margin: 30px 0;
-    padding-left: 20px;
-    border-left: 2px solid rgba(255,255,255,0.1);
-}
-
-.timeline-item {
-    position: relative;
-    padding-bottom: 25px;
-    padding-left: 20px;
-}
-
-.timeline-item::before {
-    content: "";
-    position: absolute;
-    left: -27px;
-    top: 5px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--accent-blue);
-    box-shadow: 0 0 10px var(--accent-blue);
-}
-
-.timeline-item h4 {
-    margin: 0 0 5px 0;
-    color: #fff;
-    font-size: 1.15rem;
-}
-
+/* SECCIÓN DE PLANES DE PAGO */
 .planes-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -546,13 +517,22 @@ nav a:hover {
     transition: all 0.3s ease;
 }
 
+.pack:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
 .pack.featured {
     border-color: var(--accent-purple);
     background: linear-gradient(180deg, rgba(192, 132, 252, 0.06), rgba(11, 15, 25, 0.6));
     transform: scale(1.03);
 }
 
-.pack.featured .badge {
+.pack.featured:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.pack .badge {
     position: absolute;
     top: -14px;
     left: 50%;
@@ -590,6 +570,7 @@ nav a:hover {
     position: relative;
     margin-bottom: 12px;
     color: #cbd5e1;
+    font-size: 0.95rem;
 }
 
 .pack ul li::before {
@@ -598,6 +579,36 @@ nav a:hover {
     left: 0;
     color: var(--accent-green);
     font-weight: bold;
+}
+
+.timeline {
+    margin: 30px 0;
+    padding-left: 20px;
+    border-left: 2px solid rgba(255,255,255,0.1);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 25px;
+    padding-left: 20px;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -27px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    box-shadow: 0 0 10px var(--accent-blue);
+}
+
+.timeline-item h4 {
+    margin: 0 0 5px 0;
+    color: #fff;
+    font-size: 1.15rem;
 }
 
 .hero-image {
@@ -704,6 +715,7 @@ nav a:hover {
     <a href="#desahogo">Zona de Desahogo</a>
     <a href="#noticias">Casos de Éxito</a>
     <a href="#videos-informativos">Vídeos de Apoyo</a>
+    <a href="#planes">Planes de Apoyo</a>
     <a href="#info">¿Qué le pasa a mi mente?</a>
 </nav>
 
@@ -808,10 +820,9 @@ nav a:hover {
         <div class="diary-history" id="diary-history-box"></div>
     </div>
 
-
-    <!-- NUEVA SECCIÓN EXTRA: CUADRO DE DESAHOGO SIN FILTROS (EFÍMERO) -->
+    <!-- ZONA DE DESAHOGO EXPRESS (EFÍMERO) -->
     <div class="card vent-section" id="desahogo">
-        <h2>Sona de Desahogo Express: Suelta la Carga</h2>
+        <h2>Zona de Desahogo Express: Suelta la Carga</h2>
         <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;">
             💨 <strong>Espacio Efímero de Catarsis:</strong> ¿Sientes rabia, miedo, desesperación o un impulso incontrolable justo ahora? Escríbelo todo aquí con total libertad. Esta caja **no guarda nada**. Cuando termines, presiona el botón para quemarlo y dejar ir ese peso mental.
         </p>
@@ -825,7 +836,6 @@ nav a:hover {
             <button class="btn btn-danger" id="burn-btn" style="background: linear-gradient(135deg, #f43f5e, #991b1b);">🔥 Quemar y Liberar Mente</button>
         </div>
     </div>
-
 
     <!-- CASOS DE ÉXITO -->
     <div class="card" id="noticias">
@@ -846,7 +856,7 @@ nav a:hover {
         </div>
     </div>
 
-    <!-- VIDEOTECA INTEGRADA AMPLADA -->
+    <!-- VIDEOTECA INTEGRADA -->
     <div class="card" id="videos-informativos">
         <h2>Zona Audiovisual: Aprende a Proteger tu Mente</h2>
         <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Micro-documentales y guías desarrolladas por neuropsicólogos para entender y desactivar los mecanismos de la ansiedad y los antojos emocionales.</p>
@@ -860,7 +870,7 @@ nav a:hover {
                 </div>
                 <div class="video-info">
                     <h3>¿Cómo Regular tus Emociones?</h3>
-                    <p>Una explicación clínica y neurocientífica para controlar los desbordes emocionales cotidianos.</p>
+                    <p>Una explanation clínica y neurocientífica para controlar los desbordes emocionales cotidianos.</p>
                 </div>
             </div>
 
@@ -886,6 +896,56 @@ nav a:hover {
                     <h3>Ansiedad: Aliada o Enemiga</h3>
                     <p>Aprende a transformar la energía paralizante de los ataques de pánico en un mecanismo de autoprotección.</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE PLANES DE PAGO REINTEGRADA -->
+    <div class="card" id="planes">
+        <h2>Planes de Acompañamiento Integral</h2>
+        <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; text-align: center;">Elige el nivel de soporte que necesitas para blindar tu proceso de recuperación y estabilidad mental.</p>
+        
+        <div class="planes-container">
+            <div class="pack">
+                <h3>Plan Básico</h3>
+                <div class="price">$0 <span>/ siempre gratis</span></div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Ideal para contención inicial autónoma.</p>
+                <ul>
+                    <li>Acceso al Compás de Auxilio Emocional</li>
+                    <li>Diario de Descarga Local Privado</li>
+                    <li>Zona de Desahogo Express ilimitada</li>
+                    <li>Videoteca informativa básica</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%; margin-top: 15px;" onclick="crearToast('🌱 Ya tienes acceso activo al Plan Básico.')">Plan Activo</button>
+            </div>
+
+            <div class="pack featured">
+                <div class="badge">MÁS RECOMENDADO</div>
+                <h3>Plan Premium</h3>
+                <div class="price">$19.99 <span>/ mes</span></div>
+                <p style="color: #cbd5e1; font-size: 0.9rem;">Para quienes buscan un cambio real estructurado.</p>
+                <ul>
+                    <li><strong>Todo lo del Plan Básico</strong></li>
+                    <li>Acceso prioritario 24/7 al Call Center SOS</li>
+                    <li>Reportes semanales de análisis de estado de ánimo</li>
+                    <li>Guías avanzadas de neuropsicología descargables</li>
+                    <li>Bloqueador de apps de riesgo integrado</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="crearToast('🚀 Redirigiendo a pasarela segura de pago Premium...')">Contratar Premium</button>
+            </div>
+
+            <div class="pack" style="border-color: rgba(56, 189, 248, 0.4);">
+                <h3>Plan VIP Especializado</h3>
+                <div class="price">$49.99 <span>/ mes</span></div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Acompañamiento médico y humano absoluto.</p>
+                <ul>
+                    <li><strong>Todo lo del Plan Premium</strong></li>
+                    <li>2 Sesiones mensuales individuales con psicólogos</li>
+                    <li>Línea directa de mensajería instantánea exclusiva</li>
+                    <li>Acceso a grupos VIP de apoyo mutuo guiados</li>
+                    <li>Plan de contingencia personalizado para recaídas</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%; margin-top: 15px; border-color: var(--accent-blue); color: #fff;" onclick="crearToast('👑 Conectando con un asesor VIP para tu entrevista inicial...')">Contratar VIP</button>
             </div>
         </div>
     </div>
@@ -993,7 +1053,7 @@ function iniciarConteoRegresivo(duracionSegundos) {
         let minutos = parseInt(tiempoRestante / 60, 10);
         let segundos = parseInt(tiempoRestante % 60, 10);
 
-        minutos = minutes < 10 ? "0" + minutos : minutos;
+        minutos = minutos < 10 ? "0" + minutos : minutos;
         segundos = segundos < 10 ? "0" + segundos : segundos;
 
         display.textContent = minutos + ":" + segundos;
@@ -1015,10 +1075,12 @@ function crearToast(mensaje) {
     nuevoToast.className = 'toast';
     nuevoToast.textContent = mensaje;
     
-    if (mensaje.includes('Desahogo') || mensaje.includes('liberada')) {
+    if (mensaje.includes('Desahogo') || mensaje.includes('destruido')) {
         nuevoToast.style.borderLeftColor = 'var(--accent-rose)';
     } else if (mensaje.includes('Diario') || mensaje.includes('guardada')) {
         nuevoToast.style.borderLeftColor = 'var(--accent-green)';
+    } else if (mensaje.includes('Premium') || mensaje.includes('VIP')) {
+        nuevoToast.style.borderLeftColor = 'var(--accent-purple)';
     }
     
     contenedor.appendChild(nuevoToast);
@@ -1100,7 +1162,6 @@ document.getElementById('clear-diary-btn').addEventListener('click', () => {
     }
 });
 
-
 // LÓGICA DE LA ZONA DE DESAHOGO EXPRESS
 const ventInput = document.getElementById('vent-input');
 const ventCounter = document.getElementById('vent-counter');
@@ -1115,11 +1176,10 @@ ventInput.addEventListener('input', () => {
 burnBtn.addEventListener('click', () => {
     const texto = ventInput.value.trim();
     if (!texto) {
-        crearToast("⚠️ No hay nada escrito para desahogar todavía. ¡Sueltalo todo!");
+        crearToast("⚠️ No hay nada escrito para desahogar todavía. ¡Suéltalo todo!");
         return;
     }
 
-    // Animación de desvanecimiento
     ventInput.classList.add('vent-burn-animation');
 
     setTimeout(() => {
@@ -1129,7 +1189,6 @@ burnBtn.addEventListener('click', () => {
         crearToast("🔥 ¡Desahogo Completado! Tu texto ha sido destruido por completo. Tu mente está ahora más ligera.");
     }, 600);
 });
-
 
 // Inicializar componentes
 cargarDiario();
