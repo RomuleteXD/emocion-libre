@@ -238,6 +238,173 @@ nav a:hover {
     gap: 40px;
 }
 
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.video-wrapper {
+    background: rgba(11, 15, 25, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.video-wrapper:hover {
+    transform: translateY(-5px);
+    border-color: rgba(56, 189, 248, 0.4);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.play-icon {
+    font-size: 2.5rem;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.video-placeholder:hover .play-icon {
+    transform: scale(1.1);
+    background: var(--accent-blue);
+    color: #fff;
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
+}
+
+.video-info {
+    padding: 20px;
+}
+
+.video-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.15rem;
+    color: #fff;
+}
+
+.video-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* ESTILOS DE LA ZONA DEL DIARIO */
+.diary-section {
+    background: #0d1527;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.mood-selector {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.mood-opt {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 18px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    color: var(--text-muted);
+}
+
+.mood-opt:hover {
+    border-color: var(--accent-blue);
+    color: #fff;
+}
+
+.mood-opt.selected {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: var(--accent-blue);
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.diary-textarea {
+    width: 100%;
+    height: 160px;
+    background: #070b13;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1.05rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.diary-textarea:focus {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 15px rgba(192, 132, 252, 0.1);
+}
+
+.diary-history {
+    margin-top: 35px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.diary-item {
+    background: rgba(11, 15, 25, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+    animation: fadeIn 0.4s ease;
+}
+
+.diary-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 6px;
+}
+
+.diary-text-content {
+    color: #e2e8f0;
+    white-space: pre-wrap;
+    font-size: 1rem;
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -262,6 +429,17 @@ nav a:hover {
 .btn-primary:hover {
     box-shadow: 0 15px 30px rgba(192, 132, 252, 0.5);
     transform: translateY(-3px);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
 }
 
 .btn-whatsapp {
@@ -396,51 +574,6 @@ nav a:hover {
     border-radius: 20px;
 }
 
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-}
-
-.video-placeholder {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(11,15,25,0.5), rgba(11,15,25,0.95)), 
-                url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80') center/cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 30px;
-    cursor: pointer;
-}
-
-.play-icon {
-    font-size: 4rem;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(8px);
-    width: 95px;
-    height: 95px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-.video-placeholder:hover .play-icon {
-    transform: scale(1.1);
-    background: var(--accent-blue);
-    color: #fff;
-    box-shadow: 0 0 35px rgba(56, 189, 248, 0.6);
-}
-
 .caso-item {
     background: rgba(11, 15, 25, 0.5);
     border: 1px solid rgba(255,255,255,0.02);
@@ -534,6 +667,7 @@ nav a:hover {
 <nav>
     <a href="#callcenter">Call Center SOS</a>
     <a href="#emociones">Auxilio Emocional</a>
+    <a href="#diario">Diario de Descarga</a>
     <a href="#noticias">Casos de Éxito</a>
     <a href="#videos-informativos">Vídeos de Apoyo</a>
     <a href="#info">¿Qué le pasa a mi mente?</a>
@@ -542,13 +676,13 @@ nav a:hover {
 
 <div class="container">
 
-    <!-- SECCIÓN DE CALL CENTER (AHORA PRIMERO) -->
+    <!-- SECCIÓN DE CALL CENTER -->
     <div class="card" id="callcenter" style="background: linear-gradient(135deg, #131c2e, #2e1322); border: 2px solid var(--accent-rose);">
         <div class="grid-2" style="align-items: center;">
             <div>
                 <span style="color: var(--accent-rose); font-weight: 800; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1.5px; display:block; margin-bottom:10px;">Línea Telefónica de Respuesta Inmediata</span>
                 <h2>Call Center Profesional 24/7</h2>
-                <p style="font-size: 1.15rem; color: #f1f5f9;">¿Prefieres escuchar una voz amiga en vez de escribir? Contamos con un equipo de psicólogos clínicos listos para intervenir en momentos críticos de desborde emocional.</p>
+                <p style="font-size: 1.15rem; color: #f1f5f9;">¿Prefieres escuchar una voice amiga en vez de escribir? Contamos con un equipo de psicólogos clínicos listos para intervenir en momentos críticos de desborde emocional.</p>
                 
                 <div class="call-center-box">
                     <p style="margin: 0 0 10px 0; font-size: 1rem; color: #fff;"><span class="pulse-indicator"></span> <strong>Operadores Disponibles Ahora Mismo</strong></p>
@@ -615,6 +749,34 @@ nav a:hover {
         </div>
     </div>
 
+    <!-- NUEVA SECCIÓN: DIARIO VIVIR (DESCARGA EMOCIONAL) -->
+    <div class="card diary-section" id="diario">
+        <h2>Diario Íntimo de Descarga Emocional</h2>
+        <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;">
+            🔒 <strong>100% Confidencial y Seguro:</strong> Tus notas se guardan de forma local en tu propio dispositivo. Ningún servidor ni persona externa puede acceder a lo que escribes aquí. Úsalo para soltar tus cargas.
+        </p>
+
+        <div style="margin-bottom: 15px; font-weight: 600; font-size: 1rem; color: #fff;">¿Cómo definirías tu estado de ánimo general hoy?</div>
+        <div class="mood-selector" id="mood-container">
+            <div class="mood-opt" data-mood="Tranquilo / En Control">🌱 Tranquilo / En Control</div>
+            <div class="mood-opt" data-mood="Ansioso / Agobiado">⚡ Ansioso / Agobiado</div>
+            <div class="mood-opt" data-mood="Triste / Solitario">😔 Triste / Solitario</div>
+            <div class="mood-opt" data-mood="Irritable / Frustrado">🔥 Irritable / Frustrado</div>
+            <div class="mood-opt" data-mood="En Proceso de Recuperación">💪 En Recuperación</div>
+        </div>
+
+        <textarea class="diary-textarea" id="diary-input" placeholder="Escribe libremente... ¿Qué te pasó hoy? ¿Qué emociones sentiste? ¿Cómo manejaste los impulsos? Desahógate sin juzgarte..."></textarea>
+        
+        <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 15px;">
+            <button class="btn btn-primary" id="save-diary-btn">💾 Guardar en mi bitácora</button>
+            <button class="btn btn-secondary" id="clear-diary-btn">🗑️ Limpiar Historial del Dispositivo</button>
+        </div>
+
+        <div class="diary-history" id="diary-history-box">
+            <!-- Las entradas del diario se cargarán dinámicamente aquí -->
+        </div>
+    </div>
+
     <!-- CASOS DE ÉXITO -->
     <div class="card" id="noticias">
         <h2>Evidencia Viva: Historias de Victoria Absoluta</h2>
@@ -634,17 +796,48 @@ nav a:hover {
         </div>
     </div>
 
-    <!-- ZONA DE VIDEOS INFORMATIVOS -->
+    <!-- VIDEOTECA INTEGRADA AMPLADA -->
     <div class="card" id="videos-informativos">
         <h2>Zona Audiovisual: Aprende a Proteger tu Mente</h2>
-        <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Micro-documentales y guías dinámicas desarrolladas por neuropsicólogos para entender el comportamiento de tu cerebro.</p>
+        <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Micro-documentales y guías desarrolladas por neuropsicólogos para entender y desactivar los mecanismos de la ansiedad y los antojos emocionales.</p>
         
-        <div class="grid-2" style="align-items: center; grid-template-columns: 1fr;">
-            <div class="video-container" id="video-clinical-trigger">
-                <div class="video-placeholder">
-                    <div class="play-icon">▶</div>
-                    <h3 style="margin:0 10px 15px 10px; font-size:1.6rem;">¿Cómo REGULAR tus EMOCIONES científicamente?</h3>
-                    <p style="font-size:1rem; color:#cbd5e1;">Haz clic para desplegar el microdocumental académico interactivo.</p>
+        <div class="video-grid">
+            <!-- Video 1 -->
+            <div class="video-wrapper">
+                <div class="video-container" id="vid-regulation">
+                    <div class="video-placeholder" style="background: linear-gradient(rgba(11,15,25,0.6), rgba(11,15,25,0.95)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80') center/cover;">
+                        <div class="play-icon">▶</div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3>¿Cómo Regular tus Emociones?</h3>
+                    <p>Una explicación clínica y neurocientífica para controlar los desbordes emocionales cotidianos.</p>
+                </div>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="video-wrapper">
+                <div class="video-container" id="vid-craving">
+                    <div class="video-placeholder" style="background: linear-gradient(rgba(11,15,25,0.6), rgba(11,15,25,0.95)), url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=500&q=80') center/cover;">
+                        <div class="play-icon">▶</div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3>¿Qué es el Craving y cómo ganarle?</h3>
+                    <p>Descubre qué le sucede a tu cerebro durante los 15 minutos críticos de un antojo o impulso involuntario.</p>
+                </div>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="video-wrapper">
+                <div class="video-container" id="vid-anxiety">
+                    <div class="video-placeholder" style="background: linear-gradient(rgba(11,15,25,0.6), rgba(11,15,25,0.95)), url('https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=500&q=80') center/cover;">
+                        <div class="play-icon">▶</div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3>Ansiedad: Aliada o Enemiga</h3>
+                    <p>Aprende a transformar la energía paralizante de los ataques de pánico en un mecanismo de autoprotección.</p>
                 </div>
             </div>
         </div>
@@ -805,6 +998,8 @@ function crearToast(mensaje) {
         nuevoToast.style.borderLeftColor = 'var(--accent-purple)';
     } else if (mensaje.includes('checkout') || mensaje.includes('adquirir') || mensaje.includes('Plan')) {
         nuevoToast.style.borderLeftColor = 'var(--accent-amber)';
+    } else if (mensaje.includes('Diario') || mensaje.includes('guardada')) {
+        nuevoToast.style.borderLeftColor = 'var(--accent-green)';
     }
     
     contenedor.appendChild(nuevoToast);
@@ -815,22 +1010,113 @@ function crearToast(mensaje) {
     }, 5000);
 }
 
-const videoBtn = document.getElementById('video-clinical-trigger');
-if (videoBtn) {
-    videoBtn.addEventListener('click', () => {
-        videoBtn.innerHTML = `
-            <iframe 
-                src="https://www.youtube-nocookie.com/embed/xuU_cCFOFA0?autoplay=1&start=36" 
-                title="Cómo REGULAR tus EMOCIONES" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
-            </iframe>
+// LÓGICA DEL DIARIO EMOCIONAL
+let selectedMood = "";
+const moodElements = document.querySelectorAll('.mood-opt');
+
+moodElements.forEach(opt => {
+    opt.addEventListener('click', () => {
+        moodElements.forEach(el => el.classList.remove('selected'));
+        opt.classList.add('selected');
+        selectedMood = opt.getAttribute('data-mood');
+    });
+});
+
+function cargarDiario() {
+    const historialBox = document.getElementById('diary-history-box');
+    historialBox.innerHTML = "";
+    const entradas = JSON.parse(localStorage.getItem('emocion_libre_diario')) || [];
+    
+    if (entradas.length === 0) {
+        historialBox.innerHTML = `<p style="color: var(--text-muted); font-style: italic; text-align: center; margin-top: 20px;">Tu bitácora está vacía. Las notas que guardes aparecerán ordenadas aquí de forma privada.</p>`;
+        return;
+    }
+
+    entradas.reverse().forEach(entrada => {
+        const item = document.createElement('div');
+        item.className = 'diary-item';
+        item.innerHTML = `
+            <div class="diary-meta">
+                <span>📅 ${entrada.fecha}</span>
+                <span style="color: var(--accent-blue); font-weight: bold;">Estado: ${entrada.animo}</span>
+            </div>
+            <div class="diary-text-content">${entrada.texto}</div>
         `;
-        crearToast("🎥 Inicializando reproducción del microdocumental académico...");
+        historialBox.appendChild(item);
     });
 }
+
+document.getElementById('save-diary-btn').addEventListener('click', () => {
+    const texto = document.getElementById('diary-input').value.trim();
+    
+    if (!selectedMood) {
+        crearToast("⚠️ Por favor, selecciona un estado de ánimo antes de guardar.");
+        return;
+    }
+    if (!texto) {
+        crearToast("⚠️ La nota del diario está vacía. Escribe algo sobre tu día.");
+        return;
+    }
+
+    const opcionesFecha = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    const ahora = new Date().toLocaleDateString('es-ES', opcionesFecha);
+
+    const nuevaEntrada = {
+        fecha: ahora,
+        animo: selectedMood,
+        texto: texto
+    };
+
+    const entradas = JSON.parse(localStorage.getItem('emocion_libre_diario')) || [];
+    entradas.push(nuevaEntrada);
+    localStorage.setItem('emocion_libre_diario', JSON.stringify(entradas));
+
+    // Limpiar campos
+    document.getElementById('diary-input').value = "";
+    moodElements.forEach(el => el.classList.remove('selected'));
+    selectedMood = "";
+
+    crearToast("💾 Entrada de Diario guardada de forma segura en tu dispositivo.");
+    cargarDiario();
+});
+
+document.getElementById('clear-diary-btn').addEventListener('click', () => {
+    if (confirm("¿Estás seguro de que deseas eliminar permanentemente todas las notas de este diario de tu dispositivo? Esta acción no se puede deshacer.")) {
+        localStorage.removeItem('emocion_libre_diario');
+        crearToast("🗑️ Todo el historial de notas locales ha sido eliminado.");
+        cargarDiario();
+    }
+});
+
+// Inicializar el diario al cargar la página
+cargarDiario();
+
+// Configuración de los 3 videos dinámicos
+const videosConfig = {
+    'vid-regulation': { embed: 'xuU_cCFOFA0?start=36', toast: '🎥 Inicializando microdocumental sobre regulación de emociones...' },
+    'vid-craving': { embed: '4t963m_F780', toast: '🎥 Cargando recurso clínico sobre contención de impulsos y dopamina...' },
+    'vid-anxiety': { embed: 'm1M8S9G8V9w', toast: '🎥 Abriendo guía interactiva sobre el manejo neurosensorial de la ansiedad...' }
+};
+
+Object.keys(videosConfig).forEach(id => {
+    const wrapper = document.getElementById(id);
+    if (wrapper) {
+        wrapper.addEventListener('click', () => {
+            const config = videosConfig[id];
+            wrapper.innerHTML = `
+                <iframe 
+                    src="https://www.youtube-nocookie.com/embed/${config.embed}&autoplay=1" 
+                    title="Video Informativo" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+                </iframe>
+            `;
+            crearToast(config.toast);
+        });
+    }
+});
 
 document.querySelectorAll('.buy-btn').forEach(btn => {
     btn.addEventListener('click', () => {
