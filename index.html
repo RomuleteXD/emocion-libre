@@ -950,23 +950,32 @@ nav a:hover {
         </div>
     </div>
 
-    <!-- NEUROCIENCIA -->
+    <!-- NEUROCIENCIA RECONFIGURADA -->
     <div class="card" id="info">
         <div class="grid-2" style="align-items: center;">
             <div>
-                <img class="hero-image" src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1200&q=80" alt="Cerebro">
+                <img class="hero-image" src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1200&q=80" alt="Cerebro y Conexiones Neuronales">
             </div>
             <div>
                 <h2>La Neurociencia de la Adicción (Sin rodeos)</h2>
-                <p style="font-size: 1.15rem; color: #cbd5e1;">Tú no eres una mala persona; eres una mente atrapada en un secuestro de dopamina.</p>
+                <p style="font-size: 1.15rem; color: #cbd5e1; margin-bottom: 20px;">Tú no eres una mala persona; eres una mente atrapada en un secuestro de dopamina.</p>
+                
                 <div class="timeline">
                     <div class="timeline-item">
                         <h4>Fase 1: El Detonante Emocional</h4>
-                        <p style="margin:0; font-size:0.9rem; color: var(--text-muted);">Tristeza, estrés o frustración bloqueada.</p>
+                        <p style="margin:0; font-size:0.9rem; color: var(--text-muted);">Tristeza, estrés o frustración bloqueada acumulada en la amígdala.</p>
                     </div>
                     <div class="timeline-item">
-                        <h4>Fase 2: El Impulso Crítico</h4>
-                        <p style="margin:0; font-size:0.9rem; color: var(--text-muted);">La mente busca alivio artificial inmediato para apagar el dolor.</p>
+                        <h4>Fase 2: El Impulso Crítico (Craving)</h4>
+                        <p style="margin:0; font-size:0.9rem; color: var(--text-muted);">La corteza prefrontal se debilita; la mente busca un alivio artificial inmediato para apagar el dolor.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Fase 3: El Secuestro Químico</h4>
+                        <p style="margin:0; font-size:0.9rem; color: var(--text-muted);">La conducta repetida libera un pico masivo de dopamina, reforzando la ruta del hábito autodestructivo.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Fase 4: El Descenso y la Caída</h4>
+                        <p style="margin:0; font-size:0.9rem; color: var(--text-muted);">Los niveles de dopamina caen por debajo de su línea base, generando más ansiedad y reiniciando el ciclo.</p>
                     </div>
                 </div>
             </div>
@@ -1035,6 +1044,9 @@ document.querySelectorAll('.emotion-btn').forEach(card => {
             clearInterval(intervaloContador);
             if (estrategia.timer) {
                 timerBox.style.display = 'flex';
+                // Restablecer estilos por si se completó un ciclo previo
+                const display = document.getElementById('timer-display');
+                display.style.color = ""; 
                 iniciarConteoRegresivo(15 * 60);
             } else {
                 timerBox.style.display = 'none';
@@ -1061,7 +1073,7 @@ function iniciarConteoRegresivo(duracionSegundos) {
         if (--tiempoRestante < 0) {
             clearInterval(intervaloContador);
             display.textContent = "¡LOGRADO!";
-            display.style.color = "var(--accent-green)";
+            display.style.color = "var(--accent-green, #10b981)";
             crearToast("🎉 ¡Felicidades! Lograste superar el umbral más alto del antojo. Tu fuerza mental acaba de reprogramar tus neuronas.");
         }
     }
@@ -1076,11 +1088,11 @@ function crearToast(mensaje) {
     nuevoToast.textContent = mensaje;
     
     if (mensaje.includes('Desahogo') || mensaje.includes('destruido')) {
-        nuevoToast.style.borderLeftColor = 'var(--accent-rose)';
+        nuevoToast.style.borderLeftColor = 'var(--accent-rose, #f43f5e)';
     } else if (mensaje.includes('Diario') || mensaje.includes('guardada')) {
-        nuevoToast.style.borderLeftColor = 'var(--accent-green)';
+        nuevoToast.style.borderLeftColor = 'var(--accent-green, #10b981)';
     } else if (mensaje.includes('Premium') || mensaje.includes('VIP')) {
-        nuevoToast.style.borderLeftColor = 'var(--accent-purple)';
+        nuevoToast.style.borderLeftColor = 'var(--accent-purple, #a855f7)';
     }
     
     contenedor.appendChild(nuevoToast);
@@ -1105,6 +1117,8 @@ moodElements.forEach(opt => {
 
 function cargarDiario() {
     const historialBox = document.getElementById('diary-history-box');
+    if (!historialBox) return; // Validación de seguridad por estructura estructural
+    
     historialBox.innerHTML = "";
     const entradas = JSON.parse(localStorage.getItem('emocion_libre_diario')) || [];
     
@@ -1113,13 +1127,13 @@ function cargarDiario() {
         return;
     }
 
-    entradas.reverse().forEach(entrada => {
+    entradas.slice().reverse().forEach(entrada => {
         const item = document.createElement('div');
         item.className = 'diary-item';
         item.innerHTML = `
             <div class="diary-meta">
                 <span>📅 ${entrada.fecha}</span>
-                <span style="color: var(--accent-blue); font-weight: bold;">Estado: ${entrada.animo}</span>
+                <span style="color: var(--accent-blue, #3b82f6); font-weight: bold;">Estado: ${entrada.animo}</span>
             </div>
             <div class="diary-text-content">${entrada.texto}</div>
         `;
@@ -1155,7 +1169,13 @@ document.getElementById('save-diary-btn').addEventListener('click', () => {
 });
 
 document.getElementById('clear-diary-btn').addEventListener('click', () => {
-    if (confirm("¿Deseas eliminar permanentemente todas las notas del diario local?")) {
+    const entradasActuales = JSON.parse(localStorage.getItem('emocion_libre_diario')) || [];
+    if (entradasActuales.length === 0) {
+        crearToast("⚠️ No hay notas para eliminar.");
+        return;
+    }
+    
+    if (confirm("¿Deseas eliminar permanentemente todas las notas del diario local? Esta acción no se puede deshacer.")) {
         localStorage.removeItem('emocion_libre_diario');
         crearToast("🗑️ Historial de notas locales eliminado.");
         cargarDiario();
@@ -1167,28 +1187,30 @@ const ventInput = document.getElementById('vent-input');
 const ventCounter = document.getElementById('vent-counter');
 const burnBtn = document.getElementById('burn-btn');
 
-ventInput.addEventListener('input', () => {
-    const texto = ventInput.value.trim();
-    const numeroPalabras = texto === "" ? 0 : texto.split(/\s+/).length;
-    ventCounter.textContent = numeroPalabras;
-});
+if (ventInput && ventCounter && burnBtn) {
+    ventInput.addEventListener('input', () => {
+        const texto = ventInput.value.trim();
+        const numeroPalabras = texto === "" ? 0 : texto.split(/\s+/).length;
+        ventCounter.textContent = numeroPalabras;
+    });
 
-burnBtn.addEventListener('click', () => {
-    const texto = ventInput.value.trim();
-    if (!texto) {
-        crearToast("⚠️ No hay nada escrito para desahogar todavía. ¡Suéltalo todo!");
-        return;
-    }
+    burnBtn.addEventListener('click', () => {
+        const texto = ventInput.value.trim();
+        if (!texto) {
+            crearToast("⚠️ No hay nada escrito para desahogar todavía. ¡Suéltalo todo!");
+            return;
+        }
 
-    ventInput.classList.add('vent-burn-animation');
+        ventInput.classList.add('vent-burn-animation');
 
-    setTimeout(() => {
-        ventInput.value = "";
-        ventCounter.textContent = "0";
-        ventInput.classList.remove('vent-burn-animation');
-        crearToast("🔥 ¡Desahogo Completado! Tu texto ha sido destruido por completo. Tu mente está ahora más ligera.");
-    }, 600);
-});
+        setTimeout(() => {
+            ventInput.value = "";
+            ventCounter.textContent = "0";
+            ventInput.classList.remove('vent-burn-animation');
+            crearToast("🔥 ¡Desahogo Completado! Tu texto ha sido destruido por completo. Tu mente está ahora más ligera.");
+        }, 600);
+    });
+}
 
 // Inicializar componentes
 cargarDiario();
@@ -1220,5 +1242,3 @@ Object.keys(videosConfig).forEach(id => {
     }
 });
 </script>
-</body>
-</html>
